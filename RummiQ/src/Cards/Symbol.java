@@ -10,6 +10,7 @@ package Cards;
  */
 public class Symbol
 {
+    // Flyweigth, estos dos son los atributos que se repetirán muchas veces
     private String nombre; // Nombre de la carta
     private String color; // Esto es para que el flyweigth tenga sentido xd (Este comentario se quitará después)
 
