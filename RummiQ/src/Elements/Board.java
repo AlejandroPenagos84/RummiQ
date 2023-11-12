@@ -1,14 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Board;
+package Elements;
 
-/**
- *
- * @author Alejandro Penagos
- */
 public class Board
 {
-    
+	private int[][] boardCells = new int[13][8];
 }
