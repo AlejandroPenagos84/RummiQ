@@ -8,31 +8,16 @@ package Cards;
  *
  * @author Alejandro Penagos
  */
-public class Symbol
+public class Symbol // Oliver: Cambié nombre y color de private a public final,
+	// puesto que, además de que deben ser accesibles, no se espera que se
+	// modifiquen durante todo el programa.
 {
-    private String nombre; // Nombre de la carta
-    private String color; // Esto es para que el flyweigth tenga sentido xd (Este comentario se quitará después)
+    public final String nombre; // Nombre de la carta
+    public final String color; // Esto es para que el flyweigth tenga sentido xd 
+		// (Este comentario se quitará después) (mentira, aquí se va a quedar)
 
     public Symbol(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-    
-    
 }
