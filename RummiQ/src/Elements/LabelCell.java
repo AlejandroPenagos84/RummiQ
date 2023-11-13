@@ -26,7 +26,7 @@ public class LabelCell extends JLabel
     }
     
     public void setImage(String URL){
-        setIcon(new ImageIcon(URL));
+        setIcon(new ImageIcon(getClass().getResource(URL)));
     }
     
     public int getRow() {
