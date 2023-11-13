@@ -66,6 +66,12 @@ public class ViewBoard extends javax.swing.JFrame
         setLabels();
         pack();
     }
+	
+	public static void log(String msg) // Oliver: Método a ser usado para
+		// permitir que las demas clases se puedan comunicar.
+	{
+		
+	}
 
     private void initBoard() {
         int auxW = 20;
