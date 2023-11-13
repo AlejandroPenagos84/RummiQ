@@ -7,6 +7,9 @@ public class Card
 	private int picID; // Guarda el número con el cual se identificará la imagen
 	//private Image image; Aqui se pondrá el atributo para que coloqué la imagen que necesite
 	private Symbol symbol;
+	public static final Card nullcard = new Card(); // Oliver: Carta de uso
+		// especial para casos donde alguna estructura no contiene cartas en
+		// algun espacio.
 	
 	public Card()
 	{
