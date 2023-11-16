@@ -162,13 +162,13 @@ public class ViewBoard extends javax.swing.JPanel
     {
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
-                panelsBoard[row][col].id = IDSBoard[row][col];
+                IDSBoard[row][col] = panelsBoard[row][col].id;
             }
         }
         
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
-                panelsContainer[row][col].id = IDSDeck[row][col];
+                IDSDeck[row][col] = panelsContainer[row][col].id;
             }
         }
         
