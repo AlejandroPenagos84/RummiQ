@@ -4,15 +4,20 @@ import java.util.HashMap;
 
 public class Board
 {
-	private Card[][] boardCards = new Card[13][8];//Creo la Matriz De Las Cartas
-        
+	private Card[][] boardCards = new Card[13][8];//Creo la Matriz De Las Cartas      
 	private Card cards;
 	private HashMap<Position, Integer> boardState;
 	private static Board instance;
 	
-	public static Board getBoardSingleton()
+	public static Board getBoard() // Oliver: Cambié el nombre del método para
+		// reducir verbosa xd
 	{
-		if (instance == null) instance = new Board();
+		if (instance == null)
+		{
+			instance = new Board();
+			instance.initCard();
+		}
+		
 		return instance;
 	}
 	
@@ -21,7 +26,9 @@ public class Board
             for (int row = 0; row < 8; row++) {
                 for (int col = 0; col < 13; col++) 
                 {
-                    boardCards[row][col] = null;// Se inicializa todo el tablero NULL
+                    boardCards[row][col] = Card.nullcard; // Oliver: se
+						// inicializa explícitamente a la carta que, por
+						// convención, se dio a entender como nula.
                 }
             }
         }
