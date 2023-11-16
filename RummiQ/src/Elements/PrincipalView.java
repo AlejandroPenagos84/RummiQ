@@ -1,5 +1,7 @@
 package Elements;
 
+import java.awt.Color;
+
 
 public class PrincipalView extends javax.swing.JFrame
 {
@@ -9,6 +11,7 @@ public class PrincipalView extends javax.swing.JFrame
     {
         super("RUMMI Q");
         this.c = c;
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         pack();

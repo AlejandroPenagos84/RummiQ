@@ -77,7 +77,8 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
             for (int i = 0; i < 13; i++) {//Columnas
                 
-                // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y se repite con el otro, mator a 80 y menor a 140
+                // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y 
+                // se repite con el otro, mator a 80 y menor a 140
                 int ini = (auxAncho * i) - 10; 
                 int fin = (auxAncho * (i + 1)) - 10;
 
@@ -182,7 +183,6 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                 }
             }
         }
-        
         viewBoard.getClient().setBoardID(viewBoard.BoardID());//Actualizo la matriz de ID que está en la clase Board
     }
 
