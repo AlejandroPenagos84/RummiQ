@@ -35,6 +35,33 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     @Override
     public void mousePressed(MouseEvent e) {
         ini = new Point(e.getPoint());
+        Point initialPoint = new Point(e.getLocationOnScreen());
+        
+        int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
+        int auxLargo = viewBoard.getHeightBoard() / 8;
+
+        int x = e.getLocationOnScreen().x +  - ini.x;
+        int y =  e.getLocationOnScreen().y +  - ini.y;
+        
+        for (int i = 0; i < 9; i++) 
+        {//Columnas
+            int ini = 900 + (auxAncho * i)-10; // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y se repite con el otro, mator a 80 y menor a 140
+            int fin = 900 + (auxAncho * (i + 1))-10;
+            
+            for (int k = 0; k < 5; k++)
+            {//Filas
+                int iniK = auxLargo * k-25;
+                int finK = auxLargo * (k + 1)-25;
+                if (x > ini && x < fin && y > iniK && y < finK)
+                {
+                    
+                    
+                    viewBoard.getClient().initPos(k, i);
+                    //Aqui es donde realmente le estoy pasando a board la posicion
+                    // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
+                }
+            }
+        }
     }
 
     @Override
@@ -82,21 +109,23 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
         int x = aux.getLocation().x + e.getX() - ini.x;
         int y = aux.getLocation().y + e.getY() - ini.y;
-
-        for (int i = 0; i < 13; i++) {
+        System.out.println(ini.x);
+        for (int i = 0; i < 13; i++) 
+        {//Columnas
             int ini = (auxAncho * i)-10; // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y se repite con el otro, mator a 80 y menor a 140
             int fin = (auxAncho * (i + 1))-10;
             
-            for (int k = 0; k < 8; k++) {
+            for (int k = 0; k < 8; k++)
+            {//Filas
                 int iniK = auxLargo * k-25;
                 int finK = auxLargo * (k + 1)-25;
-                System.out.println("ini: "+ini+", final: "+fin);
-                System.out.println("x: "+x+", y: "+y);
-                if (x > ini && x < fin && y > iniK && y < finK) {
+                if (x > ini && x < fin && y > iniK && y < finK)
+                {
                     int mitadX = ini + (auxAncho/2); // este es el auxAncho /2
                     int mitadY = iniK + (auxLargo/2);
-
                     aux.setLocation(mitadX, mitadY);
+                    
+                    viewBoard.getClient().finalPos(k, i);//Aqui es donde realmente le estoy pasando a board la posicion
                     // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                 }
             }

@@ -16,8 +16,6 @@ public class ViewBoard extends javax.swing.JPanel
     private JLabel containerLabels[][];
     private JLabel cards[][];
     private BoardLogicController controller;
-    
-
     private final int widthBoard, heightBoard, widthC, heightC;
 
     public ViewBoard(Client c) {
@@ -134,6 +132,11 @@ public class ViewBoard extends javax.swing.JPanel
     {
         return panelsBoard;
     }
+    
+    public Client getClient()
+    {
+        return client;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -157,8 +160,9 @@ public class ViewBoard extends javax.swing.JPanel
     public int getHeightBoard() {
         return heightBoard;
     }
+    
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

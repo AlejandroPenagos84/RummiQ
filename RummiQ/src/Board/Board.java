@@ -9,10 +9,22 @@ public class Board
 	private Card cards;
 	private HashMap<Position, Integer> boardState;
 	private static Board instance;
-	
+	private Position iniPos;
+        private Position finalPos;
+
+        
+        private Board()
+        {
+            iniPos = null;
+            finalPos = null;
+        }
+        
 	public static Board getBoardSingleton()
 	{
-		if (instance == null) instance = new Board();
+		if (instance == null)
+                {
+                    instance = new Board();
+                }
 		return instance;
 	}
 	
@@ -44,4 +56,25 @@ public class Board
 			this.col = col;
 		}
 	}
+        
+        public Position getIniPos() {
+            return iniPos;
+        }
+
+        public void setIniPos(Position iniPos) {
+            this.iniPos = iniPos;
+        }
+
+        public Position getFinalPos() {
+            return finalPos;
+        }
+
+        public void setFinalPos(Position finalPos) {
+            this.finalPos = finalPos;
+        }
+        
+        public Position createPostion(int x, int y)
+        {
+            return new Position(x,y);
+        }
 }
