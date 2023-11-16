@@ -25,7 +25,7 @@ public class Client
 
     public Board getBoard() {
         if (BOARD == null) {
-            BOARD = Board.getBoardSingleton();
+            BOARD = Board.getBoard(this);
         }
         return BOARD;
     }
@@ -35,17 +35,20 @@ public class Client
         getPrincipalView().add(getViewBoard());
         getPrincipalView().pack();
     }
-
-    //Con la instancia De Board modifico la posicion inicial que le de el viewBoard
-    //Creeria que se reiniciaría cuando termina de poner una carta
-    public void initPos(int x, int y) {
-        BOARD.setIniPos(BOARD.createPostion(x, y));
-
+ 
+    public void setBoardID(int[][] board)
+    {
+        BOARD.setBoardID(board);
     }
-
-    //Con la instancia De Board modifico la posicion final que le de el viewBoard
-    //Creeria que se reiniciaría cuando termina de poner una carta
-    public void finalPos(int x, int y) {
-        BOARD.setFinalPos(BOARD.createPostion(x, y));
+    
+    public void setDeckID(int[][] deck)
+    {
+        BOARD.setDeckID(deck);
     }
+    
+    public void UpdateMatrix()
+    {
+        VIEW_BOARD.UpdateMatrix();
+    }
+            
 }
