@@ -1,7 +1,7 @@
 package Player;
 import Cards.Card;
-import Elements.Board;
-import Elements.CardStack;
+import Board.Board;
+import Board.CardStack;
 import Elements.ViewBoard;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,8 +47,8 @@ public class Player
 		
 		if (!exists)
 		{
-			ViewBoard.log("Error de codigo: el jugador no puede agregar al "
-				+ "tablero cartas que no están en su baraja.\n");
+			//ViewBoard.log("Error de codigo: el jugador no puede agregar al "
+				//+ "tablero cartas que no están en su baraja.\n");
 			return;
 		}
 		}
