@@ -177,10 +177,12 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
                     viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
                     viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
+                    break;
                     // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                 }
             }
         }
+        
         viewBoard.getClient().setBoardID(viewBoard.BoardID());//Actualizo la matriz de ID que está en la clase Board
     }
 
