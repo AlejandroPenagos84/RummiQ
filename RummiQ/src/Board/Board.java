@@ -8,11 +8,11 @@ public class Board
 {
 
     private Client client;
-    private Card[][] boardCards = new Card[8][13];//Creo la Matriz De Las Cartas      
+    private Card[][] boardCards = new Card[8][13]; // Creo la Matriz De Las Cartas      
     private Card cards;
     private HashMap<Position, Integer> boardState;
     private static Board instance;
-    private int[][] deckID;
+    private int[][] playerDeckID; // Cambiado de deckID a playerDeckID
     private int[][] boardID;
     private Position iniPos;
     private Position finalPos;
@@ -23,9 +23,7 @@ public class Board
         finalPos = null;
     }
 
-    public static Board getBoard(Client c) // Oliver: Cambié el nombre del método para
-    // reducir verbosa xd
-    {
+    public static Board getBoard(Client c) {
         if (instance == null) {
             instance = new Board(c);
             instance.initCard();
@@ -36,16 +34,13 @@ public class Board
     private void initCard() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                boardCards[row][col] = Card.nullcard; // Oliver: se
-                // inicializa explícitamente a la carta que, por
-                // convención, se dio a entender como nula.
+                boardCards[row][col] = Card.nullcard; // Inicializado explícitamente a la carta nula
             }
         }
     }
 
     public boolean validState(HashMap<Position, Integer> boardState) {
-
-        return false; // TODO: IMPLEMENTAR FUNCIÓN Y ELIMINAR ÉSTE RETURN
+        return false; // TODO: IMPLEMENTAR FUNCIÓN Y ELIMINAR ESTE RETURN
     }
 
     public class Position
@@ -80,12 +75,11 @@ public class Board
         this.client = client;
     }
 
-    public int[][] getDeckID() {
-        return deckID;
+    public int[][] getPlayerDeckID() {
+        return playerDeckID;
     }
 
-    public void setDeckID(int[][] deckID) {
-        this.deckID = deckID;
+    public void setPlayerDeckID(int[][] playerDeckID) {
+        this.playerDeckID = playerDeckID;
     }
-
 }

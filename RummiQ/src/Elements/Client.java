@@ -41,14 +41,13 @@ public class Client
         BOARD.setBoardID(board);
     }
     
-    public void setDeckID(int[][] deck)
+    public void setPlayerDeckID(int[][] playerDeck)
     {
-        BOARD.setDeckID(deck);
+        BOARD.setPlayerDeckID(playerDeck);
     }
     
     public void UpdateMatrix()
     {
         VIEW_BOARD.UpdateMatrix();
     }
-            
 }

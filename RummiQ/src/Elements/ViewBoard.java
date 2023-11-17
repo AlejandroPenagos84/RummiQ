@@ -18,7 +18,7 @@ public class ViewBoard extends javax.swing.JPanel
     private BoardLogicController controller;
     private final int widthBoard, heightBoard, widthC, heightC;
     private int IDSBoard[][];
-    private int IDSDeck[][];
+    private int IDSPlayerDeck[][];
 
     public ViewBoard(Client c) {
         this.client = c; // Inyeccion de Dependencias
@@ -33,7 +33,7 @@ public class ViewBoard extends javax.swing.JPanel
         this.panelsContainer = new Cells[5][9];
         this.cards = new JLabel[5][9];
         this.IDSBoard = new int[8][13];
-        this.IDSDeck = new int[5][9];
+        this.IDSPlayerDeck = new int[5][9];
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));
@@ -169,7 +169,7 @@ public class ViewBoard extends javax.swing.JPanel
         
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
-                IDSDeck[row][col] = panelsContainer[row][col].id;
+                IDSPlayerDeck[row][col] = panelsContainer[row][col].id;
             }
         }
         
@@ -206,21 +206,21 @@ public class ViewBoard extends javax.swing.JPanel
         return panelsBoard;
     }
 
-    public Cells[][] getPanelsContainer() {
+    public Cells[][] getPanelsPlayerDeck() {
         return panelsContainer;
     }
 
-    public void setPanelsContainer(Cells[][] panelsContainer) {
-        this.panelsContainer = panelsContainer;
+    public void setPanelsPlayerDeck(Cells[][] panelsPlayerDeck) {
+        this.panelsContainer = panelsPlayerDeck;
     }
 
     public Client getClient() {
         return client;
     }
     
-    public int[][] DeckID()
+    public int[][] PlayerDeckID()
     {
-        return IDSDeck;
+        return IDSPlayerDeck;
     }
     
     public int[][] BoardID()
@@ -231,8 +231,9 @@ public class ViewBoard extends javax.swing.JPanel
     public void UpdateMatrix()
     {
         getClient().setBoardID(BoardID());
-        getClient().setDeckID(DeckID());
+        getClient().setPlayerDeckID(PlayerDeckID());
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

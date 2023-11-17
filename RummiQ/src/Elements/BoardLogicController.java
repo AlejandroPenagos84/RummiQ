@@ -59,13 +59,13 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                         rowI = k;
                         colI = i;
 
-                        auxID = viewBoard.getPanelsContainer()[k][i].id;//Cojo el id de la carta que tenia en la baraja
+                        auxID = viewBoard.getPanelsPlayerDeck()[k][i].id;//Cojo el id de la carta que tenia en la baraja
                         //Aqui es donde realmente le estoy pasando a board la posicion
                         // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                     }
                 }
             }
-            viewBoard.getClient().setDeckID(viewBoard.DeckID());//Actualizo la matriz que está en Board
+             viewBoard.UpdateMatrix();
         } else {
             //En caso de que coja en el lado del tablero
 
@@ -94,7 +94,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     }
                 }
             }
-            viewBoard.getClient().setBoardID(viewBoard.BoardID());//Actualizo la matriz de ID que está en la clase Board
+            viewBoard.UpdateMatrix();
         }
 
     }
@@ -112,7 +112,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                System.out.print(viewBoard.DeckID()[fila][columna] + " ");
+                System.out.print(viewBoard.PlayerDeckID()[fila][columna] + " ");
             }
             System.out.println();
         }
@@ -173,30 +173,31 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     
                     if(state)
                     {
-                        viewBoard.getPanelsContainer()[rowI][colI].id = -1;//Cambio el ID  a -1 de la baraja de cartas del jugador
-                        viewBoard.DeckID()[rowI][colI] = -1;
+                        viewBoard.getPanelsPlayerDeck()[rowI][colI].id = -1;//Cambio el ID  a -1 de la baraja de cartas del jugador
+                        viewBoard.PlayerDeckID()[rowI][colI] = -1;
                     }else{
                         viewBoard.getBoard()[rowI][colI].id = -1;//Cambio el ID  a -1 de la posicion del Tablero
                         viewBoard.BoardID()[rowI][colI] = -1;
                     }
                     viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
                     viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
+                    
+                    viewBoard.UpdateMatrix();
                     return;
                     // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                 } else {
                     if (state) {
-                        viewBoard.getPanelsContainer()[rowI][colI].id = auxID;
-                        viewBoard.DeckID()[rowI][colI] = auxID;
+                        viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
+                        viewBoard.PlayerDeckID()[rowI][colI] = auxID;
                         aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
                     } else {
                         viewBoard.getBoard()[rowI][colI].id = auxID;
                         viewBoard.BoardID()[rowI][colI] = auxID;
                         aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
                     }
-                    
+                    viewBoard.UpdateMatrix();
                 }
             }
         }
-        viewBoard.getClient().setBoardID(viewBoard.BoardID());//Actualizo la matriz de ID que está en la clase Board
     }
 }
