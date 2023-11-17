@@ -11,7 +11,6 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
 
-
 /**
  *
  * @author Alejandro Penagos
@@ -21,8 +20,11 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
     private ViewBoard viewBoard;
     private int auxID;
+
     private int rowI;
     private int colI;
+    private boolean state;
+
     private Point ini;
 
     public BoardLogicController(ViewBoard viewBoard) {
@@ -37,14 +39,15 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e) {
         ini = new Point(e.getPoint());
         Point initialPoint = new Point(e.getLocationOnScreen());
-
+        rowI = 0;
+        colI = 0;
         if (initialPoint.x >= 920) {
             int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
             int auxLargo = viewBoard.getHeightBoard() / 8;
 
             int x = e.getLocationOnScreen().x + -ini.x;
             int y = e.getLocationOnScreen().y + -ini.y;
-
+            state = true;
             for (int i = 0; i < 9; i++) {//Columnas
                 int ini = 900 + (auxAncho * i) - 10; // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y se repite con el otro, mator a 80 y menor a 140
                 int fin = 900 + (auxAncho * (i + 1)) - 10;
@@ -53,12 +56,10 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     int iniK = auxLargo * k - 25;
                     int finK = auxLargo * (k + 1) - 25;
                     if (x > ini && x < fin && y > iniK && y < finK) {
-                        rowI = i;
-                        colI = k;
-                        
+                        rowI = k;
+                        colI = i;
+
                         auxID = viewBoard.getPanelsContainer()[k][i].id;//Cojo el id de la carta que tenia en la baraja
-                        viewBoard.getPanelsContainer()[k][i].id = -1;//Cambio el ID  a -1 de la baraja de cartas del jugador
-                        viewBoard.DeckID()[k][i] = -1;// Actualizo el id
                         //Aqui es donde realmente le estoy pasando a board la posicion
                         // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                     }
@@ -67,32 +68,29 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
             viewBoard.getClient().setDeckID(viewBoard.DeckID());//Actualizo la matriz que está en Board
         } else {
             //En caso de que coja en el lado del tablero
-            
+
             // un ancho provisional y un largo provicional
-            int auxAncho = viewBoard.getWidthBoard() / 13; 
+            int auxAncho = viewBoard.getWidthBoard() / 13;
             int auxLargo = viewBoard.getHeightBoard() / 8;
 
             int x = e.getLocationOnScreen().x + -ini.x;
             int y = e.getLocationOnScreen().y + -ini.y;
-
+            state = false;
             for (int i = 0; i < 13; i++) {//Columnas
-                
+
                 // este ini y fin es para poder ubicarlos en la cuadricula, es decir, menor a 80 mayor a 20 y 
                 // se repite con el otro, mator a 80 y menor a 140
-                int ini = (auxAncho * i) - 10; 
+                int ini = (auxAncho * i) - 10;
                 int fin = (auxAncho * (i + 1)) - 10;
 
                 for (int k = 0; k < 8; k++) {//Filas
                     int iniK = auxLargo * k - 25;
                     int finK = auxLargo * (k + 1) - 25;
                     if (x > ini && x < fin && y > iniK && y < finK) {
-                        rowI = i;
-                        colI = k;
+                        rowI = k;
+                        colI = i;
 
                         auxID = viewBoard.getBoard()[k][i].id;////Coge el ID de ese punto del tablero
-                        viewBoard.getBoard()[k][i].id = -1;//Cambio el ID  a -1 de la posicion del Tablero
-                        viewBoard.BoardID()[k][i] = -1;//Actualizo el ID en la matriz de IDS
-                        
                     }
                 }
             }
@@ -111,18 +109,17 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                 }
             }
         }
-        
-        
+
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                System.out.print(viewBoard.DeckID()[fila][columna]+" ");
+                System.out.print(viewBoard.DeckID()[fila][columna] + " ");
             }
             System.out.println();
         }
-        
+
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 13; columna++) {
-                System.out.print(viewBoard.BoardID()[fila][columna]+" ");
+                System.out.print(viewBoard.BoardID()[fila][columna] + " ");
             }
             System.out.println();
         }
@@ -156,7 +153,6 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     }
 
     public void auxLocation(MouseEvent e, JLabel aux) {
-        boolean state = false;
         int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
         int auxLargo = viewBoard.getHeightBoard() / 8;
 
@@ -171,19 +167,36 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                 int iniK = auxLargo * k - 25;
                 int finK = auxLargo * (k + 1) - 25;
                 if (x > ini && x < fin && y > iniK && y < finK) {
-                    state = false;
                     int mitadX = ini + (auxAncho / 2); // este es el auxAncho /2
                     int mitadY = iniK + (auxLargo / 2);
                     aux.setLocation(mitadX, mitadY);
-
+                    
+                    if(state)
+                    {
+                        viewBoard.getPanelsContainer()[rowI][colI].id = -1;//Cambio el ID  a -1 de la baraja de cartas del jugador
+                        viewBoard.DeckID()[rowI][colI] = -1;
+                    }else{
+                        viewBoard.getBoard()[rowI][colI].id = -1;//Cambio el ID  a -1 de la posicion del Tablero
+                        viewBoard.BoardID()[rowI][colI] = -1;
+                    }
                     viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
                     viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
-                    break;
+                    return;
                     // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
+                } else {
+                    if (state) {
+                        viewBoard.getPanelsContainer()[rowI][colI].id = auxID;
+                        viewBoard.DeckID()[rowI][colI] = auxID;
+                        aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
+                    } else {
+                        viewBoard.getBoard()[rowI][colI].id = auxID;
+                        viewBoard.BoardID()[rowI][colI] = auxID;
+                        aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
+                    }
+                    
                 }
             }
         }
         viewBoard.getClient().setBoardID(viewBoard.BoardID());//Actualizo la matriz de ID que está en la clase Board
     }
-
 }

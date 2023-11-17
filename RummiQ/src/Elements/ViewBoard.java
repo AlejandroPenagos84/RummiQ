@@ -9,7 +9,7 @@ public class ViewBoard extends javax.swing.JPanel
 {
 
     private final Color uno = new Color(247, 249, 249); // no se deberia cambiar 175, 96, 26 
-    private final Color dos = new Color(102, 102, 205); // 235, 152, 78 192, 57, 43
+    private final Color dos = new Color(45, 85, 69); // 235, 152, 78 192, 57, 43
 
     private Client client;
     private Cells panelsBoard[][];
@@ -37,7 +37,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));
-        setBackground(new Color(108,142,255));
+        setBackground(new Color(209,209,209));
         
         initCards();
         addListeners();
@@ -111,7 +111,7 @@ public class ViewBoard extends javax.swing.JPanel
     private void paintContainer() { // pintamos normal
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
-                panelsContainer[row][col].setBackground(new Color(238,208,157));
+                panelsContainer[row][col].setBackground(new Color(0,0,0));
             }
         }
     }
