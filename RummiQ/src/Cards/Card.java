@@ -16,7 +16,7 @@ public class Card
 		this.id = 0;
 		this.cardNum = 0;
 		this.picID = 0;
-		this.symbol = new Symbol("", "");
+		this.symbol = new Symbol();
 	}
 	
 	public Card(int id, int cardNum, int picID, Symbol symbol)
@@ -26,4 +26,7 @@ public class Card
 		this.picID = picID;
 		this.symbol = symbol;
 	}
+	
+	public Card(int id, int cardNum, int picID, String symbol)
+	{ this(id, cardNum, picID, new Symbol(symbol)); }
 }

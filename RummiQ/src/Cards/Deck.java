@@ -2,23 +2,38 @@ package Cards;
 
 public class Deck
 {
-	private static Card[] cards;
+	private Card[] cards;
+	private static Deck instance;
 	
-	public Deck getInstance()
+	private int initCards(int idStart, String sym)
 	{
-		if (cards == null)
-		{
-			cards = new Card[109];
-			cards[0] = Card.nullcard;
-			for (int sym=0, id=1; sym<4; ++sym)
-			{
-				for (int num=1; num <= 13; ++num)
-				{
-					
-				}
-			}
-		}
+		for (int i=0; i < 13; ++i)
+			cards[i+idStart] = new Card(i+idStart, i, i+idStart, sym);
 		
-		return this; // TODO: QUITAR ESTE RETURN, LO PUSE PARA SALIR DEL PASO XD
+		return idStart + 13;
 	}
+	
+	private Deck()
+	{
+		cards = new Card[109];
+		cards[0] = Card.nullcard;
+		int id=1;
+
+		id = initCards(id, "spades");
+		id = initCards(id, "spades");
+		id = initCards(id, "clovers");
+		id = initCards(id, "clovers");
+		id = initCards(id, "diamonds");
+		id = initCards(id, "diamonds");
+		id = initCards(id, "hearts");
+		initCards(id, "hearts");
+	}
+	
+	public static Deck getInstance()
+	{
+		if (instance == null) instance = new Deck();
+		return instance;
+	}
+	
+	public Card getFromId(int id) { return cards[id]; }
 }

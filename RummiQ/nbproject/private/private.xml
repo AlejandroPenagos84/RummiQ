@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Board/Board.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Elements/BoardLogicController.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Elements/Cells.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/Symbol.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/CardSetCreator/CardSetCreator.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/Card.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Board/CardStack.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/CardSet/ColorCardSet.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/Deck.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Elements/Client.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Elements/PrincipalView.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/CardSet/NumCardSet.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Elements/ViewBoard.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Launcher/Launcher.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Player/Player.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/CardSet/CardSet.java</file>
-            <file>file:/C:/Users/Alejandro%20Penagos/Desktop/RummiQ/RummiQ/src/Cards/CardFactory.java</file>
+            <file>file:/C:/Users/OFIMATICA-PC21/Desktop/Academic%20S4/Modelos%20de%20programacion/RummiQ/RummiQ/src/Cards/Card.java</file>
+            <file>file:/C:/Users/OFIMATICA-PC21/Desktop/Academic%20S4/Modelos%20de%20programacion/RummiQ/RummiQ/src/Cards/CardFactory.java</file>
+            <file>file:/C:/Users/OFIMATICA-PC21/Desktop/Academic%20S4/Modelos%20de%20programacion/RummiQ/RummiQ/src/Cards/Deck.java</file>
+            <file>file:/C:/Users/OFIMATICA-PC21/Desktop/Academic%20S4/Modelos%20de%20programacion/RummiQ/RummiQ/src/Cards/Symbol.java</file>
         </group>
     </open-files>
 </project-private>

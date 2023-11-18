@@ -1,19 +1,21 @@
 package Cards;
 
+import Cards.Deck;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CardFactory
 {
-	static Map<String, Symbol> symbolCards = new HashMap<>();
+	static Map<Integer, Symbol> symbolCards = new HashMap<>();
 
-	public static Symbol getSymbol(String name, String color)
+	public static Symbol getSymbol(int id)
 	{
-		Symbol result = symbolCards.get(name);
+		Symbol result = symbolCards.get(id);
 		if (result == null)
 		{
-			result = new Symbol(name, color);
-			symbolCards.put(name, result);
+			// TODO: refactor.
+			//result = Deck.getInstance().getFromId(id).symbol;
+			symbolCards.put(id, result);
 		}
 		return result;
 	}
