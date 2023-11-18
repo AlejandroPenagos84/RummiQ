@@ -2,22 +2,21 @@ package Cards;
 
 public class Deck
 {
-	private Card[] cards;
+	private final Card[] cards;
 	private static Deck instance;
 	
 	private int initCards(int idStart, String sym)
 	{
-		for (int i=0; i < 13; ++i)
+		for (int i=1; i <= 13; ++i)
 			cards[i+idStart] = new Card(i+idStart, i, i+idStart, sym);
-		
 		return idStart + 13;
 	}
 	
 	private Deck()
 	{
-		cards = new Card[109];
+		cards = new Card[105];
 		cards[0] = Card.nullcard;
-		int id=1;
+		int id=0;
 
 		id = initCards(id, "spades");
 		id = initCards(id, "spades");
@@ -35,5 +34,5 @@ public class Deck
 		return instance;
 	}
 	
-	public Card getFromId(int id) { return cards[id]; }
+	public Card card(int id) { return cards[id]; }
 }

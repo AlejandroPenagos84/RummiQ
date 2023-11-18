@@ -1,5 +1,7 @@
 package Cards;
 
+import java.util.Map;
+
 public class Card
 {
 	public final int id;
@@ -29,4 +31,36 @@ public class Card
 	
 	public Card(int id, int cardNum, int picID, String symbol)
 	{ this(id, cardNum, picID, new Symbol(symbol)); }
+	
+	public String cardName()
+	{
+		if (id==0) return "Nulo.";
+		
+		switch (cardNum)
+		{
+		case 1: case 11: case 12: case 13:
+			return specials.get(cardNum) + " de " + symbol.nameStr();
+		default:
+			return "" + cardNum + " de " + symbol.nameStr();
+		}
+	}
+	
+	public String cardPic()
+	{
+		switch (cardNum)
+		{
+		case 0: case 1: case 11: case 12: case 13:
+			return specials.get(cardNum) + symbol.symbolPic();
+		default:
+			return "" + cardNum + symbol.symbolPic();
+		}
+	}
+	
+	private static final Map<Integer, String> specials = Map.of(
+		0, "",
+		1, "As",
+		11, "Jota",
+		12, "Reina",
+		13, "Rey"
+	);
 }
