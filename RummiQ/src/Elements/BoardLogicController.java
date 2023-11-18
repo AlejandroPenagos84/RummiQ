@@ -65,7 +65,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     }
                 }
             }
-             viewBoard.UpdateMatrix();
+            viewBoard.UpdateMatrix();
         } else {
             //En caso de que coja en el lado del tablero
 
@@ -156,6 +156,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
         int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
         int auxLargo = viewBoard.getHeightBoard() / 8;
 
+        boolean validId = true;
         int x = aux.getLocation().x + e.getX() - ini.x;
         int y = aux.getLocation().y + e.getY() - ini.y;
 
@@ -167,37 +168,46 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                 int iniK = auxLargo * k - 25;
                 int finK = auxLargo * (k + 1) - 25;
                 if (x > ini && x < fin && y > iniK && y < finK) {
-                    int mitadX = ini + (auxAncho / 2); // este es el auxAncho /2
-                    int mitadY = iniK + (auxLargo / 2);
-                    aux.setLocation(mitadX, mitadY);
-                    
-                    if(state)
-                    {
-                        viewBoard.getPanelsPlayerDeck()[rowI][colI].id = -1;//Cambio el ID  a -1 de la baraja de cartas del jugador
-                        viewBoard.PlayerDeckID()[rowI][colI] = -1;
-                    }else{
-                        viewBoard.getBoard()[rowI][colI].id = -1;//Cambio el ID  a -1 de la posicion del Tablero
-                        viewBoard.BoardID()[rowI][colI] = -1;
+
+                    if (viewBoard.getBoard()[k][i].id == 0) {
+                        int mitadX = ini + (auxAncho / 2); // este es el auxAncho /2
+                        int mitadY = iniK + (auxLargo / 2);
+                        aux.setLocation(mitadX, mitadY);
+
+                        if (state) {
+                            viewBoard.getPanelsPlayerDeck()[rowI][colI].id = 0;//Cambio el ID  a -1 de la baraja de cartas del jugador
+                            viewBoard.PlayerDeckID()[rowI][colI] = 0;
+                        } else {
+                            viewBoard.getBoard()[rowI][colI].id = 0;//Cambio el ID  a -1 de la posicion del Tablero
+                            viewBoard.BoardID()[rowI][colI] = 0;
+                        }
+                        viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
+                        viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
+
+                        viewBoard.UpdateMatrix();
+                        return;
+                    } else {
+                        RestorePosition(aux,auxAncho,auxLargo);
                     }
-                    viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
-                    viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
-                    
-                    viewBoard.UpdateMatrix();
-                    return;
+
                     // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                 } else {
-                    if (state) {
-                        viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
-                        viewBoard.PlayerDeckID()[rowI][colI] = auxID;
-                        aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
-                    } else {
-                        viewBoard.getBoard()[rowI][colI].id = auxID;
-                        viewBoard.BoardID()[rowI][colI] = auxID;
-                        aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
-                    }
-                    viewBoard.UpdateMatrix();
+                    RestorePosition(aux,auxAncho,auxLargo);
                 }
             }
         }
+    }
+
+    public void RestorePosition(JLabel aux, int auxAncho, int auxLargo) {
+        if (state) {
+            viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
+            viewBoard.PlayerDeckID()[rowI][colI] = auxID;
+            aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
+        } else {
+            viewBoard.getBoard()[rowI][colI].id = auxID;
+            viewBoard.BoardID()[rowI][colI] = auxID;
+            aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
+        }
+        viewBoard.UpdateMatrix();
     }
 }

@@ -61,7 +61,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                panelsBoard[row][col] = new Cells(-1);
+                panelsBoard[row][col] = new Cells(0);
                 panelsBoard[row][col].setSize(widthBoard / 13, heightBoard / 8);
                 panelsBoard[row][col].setLocation(auxW, auxH);
 
