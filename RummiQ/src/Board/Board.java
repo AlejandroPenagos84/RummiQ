@@ -32,11 +32,10 @@ public class Board
     }
 
     private void initCard() {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 13; col++) {
-                boardCards[row][col] = Card.nullcard; // Inicializado explícitamente a la carta nula
-            }
-        }
+        for (int row = 0; row < 8; row++)
+            for (int col = 0; col < 13; col++)
+                boardCards[row][col] = Card.nullcard; // Inicializando el
+					// tablero explicitamente con cartas nulas.
     }
 
     public boolean validState(HashMap<Position, Integer> boardState) {
@@ -45,7 +44,6 @@ public class Board
 
     public class Position
     {
-
         public final int row;
         public final int col;
 
@@ -55,31 +53,11 @@ public class Board
         }
     }
 
-    public int[][] getBoardID() {
-        return boardID;
-    }
-
-    public void setBoardID(int[][] boardID) {
-        this.boardID = boardID;
-    }
-
-    public Position getIniPos() {
-        return iniPos;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public int[][] getPlayerDeckID() {
-        return playerDeckID;
-    }
-
-    public void setPlayerDeckID(int[][] playerDeckID) {
-        this.playerDeckID = playerDeckID;
-    }
+    public int[][] getBoardID() { return boardID; }
+    public void setBoardID(int[][] boardID) { this.boardID = boardID; }
+    public Position getIniPos() { return iniPos; }
+    public Client getClient() { return client; }
+    public void setClient(Client client) { this.client = client; }
+    public int[][] getPlayerDeckID() { return playerDeckID; }
+    public void setPlayerDeckID(int[][] playerDeckID) { this.playerDeckID = playerDeckID; }
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import Cards.Deck;
 
 public class ViewBoard extends javax.swing.JPanel
 {
@@ -14,6 +15,7 @@ public class ViewBoard extends javax.swing.JPanel
     private Client client;
     private Cells panelsBoard[][];
     private Cells panelsContainer[][];
+	private Deck deck = Deck.getInstance();
     private JLabel cards[][];
     private BoardLogicController controller;
     private final int widthBoard, heightBoard, widthC, heightC;
@@ -126,13 +128,17 @@ public class ViewBoard extends javax.swing.JPanel
         // Heigth alto - Vertical
         int auxW = 900;
         int auxH = 20;
+		int id=1;
 
         for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 9; col++) {
+            for (int col = 0; col < 9; col++, ++id) {
+				
                 cards[row][col] = new JLabel();
                 cards[row][col].setSize(widthC / 9, heightC / 5);
                 //cards[row][col].setText("HOLA");
-                cards[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/Corazones/2Corazon.png")));
+                cards[row][col].setIcon(new ImageIcon(getClass()
+					.getResource("/Sprites/" + deck.cardPic(id+26)))
+				);
                 cards[row][col].setLocation(auxW, auxH);
                 this.add(cards[row][col]);
                 auxW += widthC / 9;
