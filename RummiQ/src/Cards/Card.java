@@ -50,9 +50,9 @@ public class Card
 		switch (cardNum)
 		{
 		case 0: case 1: case 11: case 12: case 13:
-			return specials.get(cardNum) + symbol.symbolPic();
+			return symbol.nameStr() + "/" + specials.get(cardNum) + symbol.symbolPic();
 		default:
-			return "" + cardNum + symbol.symbolPic();
+			return symbol.nameStr() + "/" + cardNum + symbol.symbolPic();
 		}
 	}
 	

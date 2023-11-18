@@ -35,4 +35,6 @@ public class Deck
 	}
 	
 	public Card card(int id) { return cards[id]; }
+	
+	public String cardPic(int id) { return card(id).cardPic(); }
 }

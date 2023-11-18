@@ -32,14 +32,14 @@ public class Symbol{ // Oliver: Cambié nombre y color de private a public final
 	);
 	
 	private static final Map<Name, String> strDecode = Map.of(
-		Name.spades, "picas",
-		Name.clovers, "treboles",
-		Name.hearts, "corazones",
-		Name.diamonds, "diamantes"
+		Name.spades, "Picas",
+		Name.clovers, "Treboles",
+		Name.hearts, "Corazones",
+		Name.diamonds, "Diamantes"
 	);
 	
 	private static final Map<Name, String> picDecode = Map.of(
-		Name.spades, "Pica",
+		Name.spades, "Picas",
 		Name.clovers, "Trebol",
 		Name.hearts, "Corazon",
 		Name.diamonds, "Diamante"
