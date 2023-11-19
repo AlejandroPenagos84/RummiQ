@@ -42,8 +42,8 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
         rowI = 0;
         colI = 0;
         if (initialPoint.x >= 920) {
-            int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
-            int auxLargo = viewBoard.getHeightBoard() / 8;
+            int auxAncho = viewBoard.widthBoard / 13; // un ancho provisional y un largo provicional
+            int auxLargo = viewBoard.heightBoard / 8;
 
             int x = e.getLocationOnScreen().x + -ini.x;
             int y = e.getLocationOnScreen().y + -ini.y;
@@ -70,8 +70,8 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
             //En caso de que coja en el lado del tablero
 
             // un ancho provisional y un largo provicional
-            int auxAncho = viewBoard.getWidthBoard() / 13;
-            int auxLargo = viewBoard.getHeightBoard() / 8;
+            int auxAncho = viewBoard.widthBoard / 13;
+            int auxLargo = viewBoard.heightBoard / 8;
 
             int x = e.getLocationOnScreen().x + -ini.x;
             int y = e.getLocationOnScreen().y + -ini.y;
@@ -153,8 +153,8 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     }
 
     public void auxLocation(MouseEvent e, JLabel aux) {
-        int auxAncho = viewBoard.getWidthBoard() / 13; // un ancho provisional y un largo provicional
-        int auxLargo = viewBoard.getHeightBoard() / 8;
+        int auxAncho = viewBoard.widthBoard / 13; // un ancho provisional y un largo provicional
+        int auxLargo = viewBoard.heightBoard / 8;
 
         boolean validId = true;
         int x = aux.getLocation().x + e.getX() - ini.x;

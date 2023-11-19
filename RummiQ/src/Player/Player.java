@@ -2,9 +2,7 @@ package Player;
 import Cards.Card;
 import Board.Board;
 import Board.CardStack;
-import Elements.ViewBoard;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Player
 {
@@ -29,37 +27,21 @@ public class Player
 		return Card.nullcard; // 
 	}
 	
-	public void alterBoard(HashMap<Board.Position, Integer> insertions,
-		HashMap<Board.Position, Integer> alterations)
+	private boolean inDeck(Card card)
 	{
-		// TODO verificar integridad del juego
-		{
-		boolean exists = false;
+		for (Card c : cards) if (card == c) return true;
+		return false;
+	}
+	
+	public void alterBoard(ArrayList<Card> insertions, int[][] boardAlteration)
+	{
+		for (Card ins : insertions)
+			if (!inDeck(ins)) return;
 		
-		for (int cardId : insertions.values())
-		{
-			for (Card card : cards)
-			{
-				if (cardId == card.id)
-					exists = true;
-			}
-		}
+		if (!board.validState(boardAlteration)) return;
 		
-		if (!exists)
-		{
-			//ViewBoard.log("Error de codigo: el jugador no puede agregar al "
-				//+ "tablero cartas que no están en su baraja.\n");
-			return;
-		}
-		}
+		for (Card ins : insertions) cards.remove(ins);
 		
-		// Sección 2: Remover las cartas usadas por el jugador
-		{
-		for (int cardId : insertions.values())
-			for (Card card : cards)
-				if (cardId == card.id) cards.remove(card);
-		}
-		
-		
+		board.setState(boardAlteration);
 	}
 }

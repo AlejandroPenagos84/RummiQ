@@ -11,13 +11,11 @@ import javax.swing.JPanel;
  *
  * @author Alejandro Penagos
  */
-public class Cells extends JPanel
+public class Cell extends JPanel
 {
     public int id;
 
-    public Cells(int id) {
+    public Cell(int id) {
         this.id = id;
     }
-    
-    
 }
