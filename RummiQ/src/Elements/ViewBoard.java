@@ -227,7 +227,11 @@ public class ViewBoard extends javax.swing.JPanel
     public void UpdateState(ArrayList<Integer> playerCards, int[][] board)
     {
         IDSBoard = board;
-        
+        for (int row=0, idx=0; row < 5; ++row)
+		{
+			for (int col=0; col < 9 && idx < playerCards.size(); ++col, ++idx)
+				IDSPlayerDeck[row][col] = playerCards.get(idx);
+		}
     }
     
 
