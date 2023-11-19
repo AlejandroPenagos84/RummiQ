@@ -67,7 +67,6 @@ public class ViewBoard extends javax.swing.JPanel
         addListeners();
         initContainer();
         initBoard();
-        initIDS();
     }
 
     /**
@@ -80,10 +79,11 @@ public class ViewBoard extends javax.swing.JPanel
         // Heigth alto - Vertical
         int auxW = 20;
         int auxH = 20;
-
+        initIDSBoard();
+        
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                panelsBoard[row][col] = new Cell(0);
+                panelsBoard[row][col] = new Cell(IDSBoard[row][col]);
                 panelsBoard[row][col].setSize(widthBoard / 13, heightBoard / 8);
                 panelsBoard[row][col].setLocation(auxW, auxH);
 
@@ -110,10 +110,13 @@ public class ViewBoard extends javax.swing.JPanel
     private void initContainer() {
         int auxW = 900;
         int auxH = 20;
-
+        
+        initIDSPlayerDeck();
+                
+        
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-                panelsContainer[row][col] = new Cell(2);
+                panelsContainer[row][col] = new Cell(IDSPlayerDeck[row][col]);
                 panelsContainer[row][col].setSize(widthC / 9, heightC / 5);
                 panelsContainer[row][col].setLocation(auxW, auxH);
                 this.add(panelsContainer[row][col]);
@@ -181,19 +184,19 @@ public class ViewBoard extends javax.swing.JPanel
         return controller;
     }
 
-    public void initIDS() {
+    public void initIDSBoard() {
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
-                IDSBoard[row][col] = panelsBoard[row][col].id;
+                IDSBoard[row][col] = 0;
             }
         }
-
+    }
+    public void initIDSPlayerDeck(){
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
-                IDSPlayerDeck[row][col] = panelsContainer[row][col].id;
+                IDSPlayerDeck[row][col] = 2;
             }
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -233,7 +236,7 @@ public class ViewBoard extends javax.swing.JPanel
         }
     }
     
-  
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
