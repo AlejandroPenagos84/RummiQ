@@ -5,9 +5,12 @@
 package Elements;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
@@ -15,7 +18,7 @@ import javax.swing.JLabel;
  *
  * @author Alejandro Penagos
  */
-public class BoardLogicController implements MouseListener, MouseMotionListener
+public class BoardLogicController implements MouseListener, MouseMotionListener, ActionListener
 {
 
     private ViewBoard viewBoard;
@@ -65,7 +68,6 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     }
                 }
             }
-            viewBoard.UpdateMatrix();
         } else {
             //En caso de que coja en el lado del tablero
 
@@ -94,7 +96,6 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
                     }
                 }
             }
-            viewBoard.UpdateMatrix();
         }
 
     }
@@ -112,14 +113,14 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                System.out.print(viewBoard.PlayerDeckID()[fila][columna] + " ");
+                System.out.print(viewBoard.IDSPlayerDeck[fila][columna] + " ");
             }
             System.out.println();
         }
 
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 13; columna++) {
-                System.out.print(viewBoard.BoardID()[fila][columna] + " ");
+                System.out.print(viewBoard.IDSBoard[fila][columna] + " ");
             }
             System.out.println();
         }
@@ -153,6 +154,9 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     }
 
     public void auxLocation(MouseEvent e, JLabel aux) {
+        ArrayList<Integer> insertions = new ArrayList<Integer>();
+        
+        
         int auxAncho = viewBoard.widthBoard / 13; // un ancho provisional y un largo provicional
         int auxLargo = viewBoard.heightBoard / 8;
 
@@ -176,15 +180,14 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
 
                         if (state) {
                             viewBoard.getPanelsPlayerDeck()[rowI][colI].id = 0;//Cambio el ID  a -1 de la baraja de cartas del jugador
-                            viewBoard.PlayerDeckID()[rowI][colI] = 0;
+                            viewBoard.IDSPlayerDeck[rowI][colI] = 0;
                         } else {
                             viewBoard.getBoard()[rowI][colI].id = 0;//Cambio el ID  a -1 de la posicion del Tablero
-                            viewBoard.BoardID()[rowI][colI] = 0;
+                            viewBoard.IDSBoard[rowI][colI] = 0;
                         }
                         viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
-                        viewBoard.BoardID()[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
-
-                        viewBoard.UpdateMatrix();
+                        viewBoard.IDSBoard[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
+                        insertions.add(auxID);
                         return;
                     } else {
                         RestorePosition(aux,auxAncho,auxLargo);
@@ -201,13 +204,21 @@ public class BoardLogicController implements MouseListener, MouseMotionListener
     public void RestorePosition(JLabel aux, int auxAncho, int auxLargo) {
         if (state) {
             viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
-            viewBoard.PlayerDeckID()[rowI][colI] = auxID;
+            viewBoard.IDSPlayerDeck[rowI][colI] = auxID;
             aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
         } else {
             viewBoard.getBoard()[rowI][colI].id = auxID;
-            viewBoard.BoardID()[rowI][colI] = auxID;
+            viewBoard.IDSBoard[rowI][colI] = auxID;
             aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
         }
-        viewBoard.UpdateMatrix();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        if(e.getSource() == viewBoard.button)
+        {
+            //viewBoard.UpdateMatrix();
+        }
     }
 }

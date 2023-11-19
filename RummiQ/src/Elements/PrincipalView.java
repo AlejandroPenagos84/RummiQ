@@ -5,12 +5,10 @@ import java.awt.Color;
 
 public class PrincipalView extends javax.swing.JFrame
 {
-    private Client c;
     
-    public PrincipalView(Client c)
+    public PrincipalView()
     {
         super("RUMMI Q");
-        this.c = c;
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -18,10 +16,6 @@ public class PrincipalView extends javax.swing.JFrame
     }
     
     
-    public PrincipalView() {
-        initComponents();
-    }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
