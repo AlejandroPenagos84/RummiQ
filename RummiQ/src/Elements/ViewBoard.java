@@ -22,18 +22,18 @@ public class ViewBoard extends javax.swing.JPanel
     private Deck deck = Deck.getInstance();
     private JLabel cards[][];
     private BoardLogicController controller;
-    
+
     public final int widthBoard, heightBoard, widthC, heightC;
     public JButton button;
-    
+
     ArrayList<Integer> insertions = new ArrayList<Integer>();
     public int IDSBoard[][];
     public int IDSPlayerDeck[][];
-    
+
     private JLabel cartaMover;
-    
+
     public ViewBoard() {
-   // Inyeccion de Dependencias
+        // Inyeccion de Dependencias
 
         this.widthBoard = 845;
         this.heightBoard = 696;
@@ -223,17 +223,18 @@ public class ViewBoard extends javax.swing.JPanel
     public Cell[][] getPanelsPlayerDeck() {
         return panelsContainer;
     }
-    
-    public void UpdateState(ArrayList<Integer> playerCards, int[][] board)
-    {
+
+    public void UpdateState(ArrayList<Integer> playerCards, int[][] board) {
         IDSBoard = board;
-        for (int row=0, idx=0; row < 5; ++row)
-		{
-			for (int col=0; col < 9 && idx < playerCards.size(); ++col, ++idx)
-				IDSPlayerDeck[row][col] = playerCards.get(idx);
-		}
+        for (int row = 0, idx = 0; row < 5; ++row) {
+            for (int col = 0; col < 9 && idx < playerCards.size(); ++col, ++idx) {
+                IDSPlayerDeck[row][col] = playerCards.get(idx);
+            }
+        }
     }
     
+  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

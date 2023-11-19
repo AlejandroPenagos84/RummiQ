@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Elements;
 
 import java.awt.Point;
@@ -22,6 +18,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 {
 
     private ViewBoard viewBoard;
+    ArrayList<Integer> insertions;
     private int auxID;
 
     private int rowI;
@@ -32,6 +29,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
     public BoardLogicController(ViewBoard viewBoard) {
         this.viewBoard = viewBoard;
+        insertions = new ArrayList<>();
     }
 
     @Override
@@ -106,7 +104,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
             for (int columna = 0; columna < 9; columna++) {
                 JLabel aux = viewBoard.getCards()[fila][columna];
                 if (e.getSource().equals(aux)) {
-                    auxLocation(e, aux);
+                    render(e, aux);
                 }
             }
         }
@@ -153,8 +151,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     public void mouseMoved(MouseEvent e) {
     }
 
-    public void auxLocation(MouseEvent e, JLabel aux) {
-        ArrayList<Integer> insertions = new ArrayList<Integer>();
+    public void render(MouseEvent e, JLabel aux) {
         
         
         int auxAncho = viewBoard.widthBoard / 13; // un ancho provisional y un largo provicional
@@ -218,7 +215,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     {
         if(e.getSource() == viewBoard.button)
         {
-            //viewBoard.UpdateMatrix();
+            viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
         }
     }
 }

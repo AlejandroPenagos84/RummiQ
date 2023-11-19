@@ -42,6 +42,6 @@ public class Player
 		
 		for (Card ins : insertions) cards.remove(ins);
 		
-		board.setState(boardAlteration);
+		board.setState(insertions, boardAlteration);
 	}
 }

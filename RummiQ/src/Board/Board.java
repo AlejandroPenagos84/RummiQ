@@ -5,6 +5,7 @@ import Cards.CardSet.CardSet;
 import Cards.CardSetCreator.CardSetCreator;
 import Cards.Deck;
 import Elements.Client;
+import Elements.ViewBoard;
 import java.util.ArrayList;
 
 public class Board
@@ -17,8 +18,8 @@ public class Board
     private static Board instance;
     private int[][] playerDeckID; // Cambiado de deckID a playerDeckID
     private int[][] boardID;
-
-
+    private ViewBoard viewBoard = new ViewBoard();
+    
     public static Board getBoard() {
         if (instance == null) {
             instance = new Board();
@@ -67,12 +68,19 @@ public class Board
         return true;
     }
 
-    public void setState(int[][] boardState) {
+    public void setState(ArrayList<Card> playerCards ,int[][] boardState) {
         for (int row = 0; row < 8; ++row) {
             for (int col = 0; col < 13; ++col) {
                 boardCards[row][col] = mainDeck.card(boardState[row][col]);
             }
         }
+        
+        ArrayList<Integer> playerCardsID = new ArrayList<>(playerCards.size());
+        for(int i = 0; i<playerCardsID.size();i++)
+        {
+            playerCardsID.set(i, playerCards.get(i).id);
+        }
+        viewBoard.UpdateState(playerCardsID, boardID);
     }
 
 
