@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Board
 {
-
     private Client client;
     private Deck mainDeck = Deck.getInstance();
     private Card[][] boardCards = new Card[8][13]; // Creo la Matriz De Las Cartas
