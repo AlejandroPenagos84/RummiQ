@@ -180,10 +180,9 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                             viewBoard.IDSPlayerDeck[rowI][colI] = 0;
                         } else {
                             viewBoard.getBoard()[rowI][colI].id = 0;//Cambio el ID  a -1 de la posicion del Tablero
-                            viewBoard.IDSBoard[rowI][colI] = 0;
+
                         }
                         viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
-                        viewBoard.IDSBoard[k][i] = auxID;//Actualizo el ID en la matriz de IDS}
                         insertions.add(auxID);
                         return;
                     } else {
@@ -201,11 +200,11 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     public void RestorePosition(JLabel aux, int auxAncho, int auxLargo) {
         if (state) {
             viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
-            viewBoard.IDSPlayerDeck[rowI][colI] = auxID;
+            //viewBoard.IDSPlayerDeck[rowI][colI] = auxID;
             aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
         } else {
             viewBoard.getBoard()[rowI][colI].id = auxID;
-            viewBoard.IDSBoard[rowI][colI] = auxID;
+           // viewBoard.IDSBoard[rowI][colI] = auxID;
             aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
         }
     }

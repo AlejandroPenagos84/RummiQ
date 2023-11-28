@@ -24,10 +24,10 @@ public class ViewBoard extends javax.swing.JPanel
     private BoardLogicController controller;
 
     public final int widthBoard = 845,
-		heightBoard = 696,
-		widthC = 585,
-		heightC = 435;
-	
+            heightBoard = 696,
+            widthC = 585,
+            heightC = 435;
+
     public JButton button;
 
     //ArrayList<Integer> insertions = new ArrayList<Integer>();
@@ -64,7 +64,7 @@ public class ViewBoard extends javax.swing.JPanel
         addListeners();
         initContainer();
         initBoard();
-		System.out.println("ViewBoard()");
+        System.out.println("ViewBoard()");
     }
 
     /**
@@ -78,7 +78,7 @@ public class ViewBoard extends javax.swing.JPanel
         int auxW = 20;
         int auxH = 20;
         initIDSBoard();
-        
+
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
                 panelsBoard[row][col] = new Cell(IDSBoard[row][col]);
@@ -92,7 +92,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightBoard / 8;
         }
         paintBoard();
-		System.out.println("initBoard()");
+        System.out.println("initBoard()");
     }
 
     /**
@@ -101,11 +101,11 @@ public class ViewBoard extends javax.swing.JPanel
     private void paintBoard() { // pintamos normal
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
-				// PINTAR CON PATRON DE MESA DE AJEDREZ
+                // PINTAR CON PATRON DE MESA DE AJEDREZ
                 // panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
-				
-				// PINTAR CON PATRON UNIFORME
-				panelsBoard[row][col].setBackground(secColor);
+
+                // PINTAR CON PATRON UNIFORME
+                panelsBoard[row][col].setBackground(secColor);
             }
         }
     }
@@ -113,10 +113,9 @@ public class ViewBoard extends javax.swing.JPanel
     private void initContainer() {
         int auxW = 900;
         int auxH = 20;
-        
+
         initIDSPlayerDeck();
-                
-        
+
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
                 panelsContainer[row][col] = new Cell(IDSPlayerDeck[row][col]);
@@ -129,7 +128,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightC / 5;
         }
         paintContainer();
-		System.out.println("initContainer()");
+        System.out.println("initContainer()");
     }
 
     private void paintContainer() { // pintamos normal
@@ -172,16 +171,15 @@ public class ViewBoard extends javax.swing.JPanel
     private void addListeners() {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-				if (cards[row][col] != null)
-				{
-					cards[row][col].addMouseListener(getControl());
-					cards[row][col].addMouseMotionListener(getControl());
-				}
+                if (cards[row][col] != null) {
+                    cards[row][col].addMouseListener(getControl());
+                    cards[row][col].addMouseMotionListener(getControl());
+                }
             }
         }
         button.addActionListener(getControl());
         this.addMouseListener(getControl());
-		System.out.println("addListeners()");
+        System.out.println("addListeners()");
     }
 
     public BoardLogicController getControl() {
@@ -198,7 +196,8 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }
-    public void initIDSPlayerDeck(){
+
+    public void initIDSPlayerDeck() {
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
                 IDSPlayerDeck[row][col] = 2;
@@ -242,8 +241,42 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }
-    
-    
+
+    private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
+        int auxAncho = widthBoard / 13;// Debido a que tanto el board como el deck miden lo mismo, se puede usar esta misma variable
+        int auxLargo = heightBoard / 8;//
+
+        if (option) {
+            card.setLocation((auxAncho * col - 10) + (auxAncho / 2), (auxLargo * row - 25) + (auxLargo / 2));
+        } else {
+            card.setLocation(900 + (auxAncho * col - 32) + (auxAncho / 2), (auxLargo * row - 25) + (auxLargo / 2));
+        }
+    }
+
+    public void UpdateInterface() {
+        // Actualizar Tablero
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 13; col++) {
+                if(panelsBoard[row][col].id != IDSBoard[row][col])
+                {
+                     UpdateSingleCard(cards[row][col], row, col, true);     
+                     panelsBoard[row][col].id = IDSBoard[row][col];
+                }
+                    
+            }
+        }
+        
+        //Actualizar Matriz jugador
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 13; col++) {
+                if(panelsContainer[row][col].id != IDSPlayerDeck[row][col])
+                {
+                    UpdateSingleCard(cards[row][col], row, col, false);
+                    panelsContainer[row][col].id = IDSPlayerDeck[row][col];
+                }   
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
