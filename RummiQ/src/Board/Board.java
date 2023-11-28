@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class Board
 {
-
     private Client client;
     private Deck mainDeck = Deck.getInstance();
     private Card[][] boardCards = new Card[8][13]; // Creo la Matriz De Las Cartas
@@ -18,7 +17,7 @@ public class Board
     private static Board instance;
     private int[][] playerDeckID; // Cambiado de deckID a playerDeckID
     private int[][] boardID;
-    private ViewBoard viewBoard = new ViewBoard();
+    private ViewBoard viewBoard;
     
     public static Board getBoard() {
         if (instance == null) {
@@ -27,6 +26,11 @@ public class Board
         }
         return instance;
     }
+	
+	public void setViewBoard(ViewBoard viewBoard)
+	{
+		this.viewBoard = viewBoard;
+	}
 
     private void initCards() {
         for (int row = 0; row < 8; row++) {

@@ -3,6 +3,7 @@ package Cards;
 public class Deck
 {
 	private final Card[] cards;
+	public final int size = 105;
 	private static Deck instance;
 	
 	private int initCards(int idStart, String sym)
@@ -14,7 +15,7 @@ public class Deck
 	
 	private Deck()
 	{
-		cards = new Card[105];
+		cards = new Card[size];
 		cards[0] = Card.nullcard;
 		int id=0;
 

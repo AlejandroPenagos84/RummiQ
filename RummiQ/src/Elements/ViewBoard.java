@@ -23,22 +23,21 @@ public class ViewBoard extends javax.swing.JPanel
     private JLabel cards[][];
     private BoardLogicController controller;
 
-    public final int widthBoard, heightBoard, widthC, heightC;
+    public final int widthBoard = 845,
+		heightBoard = 696,
+		widthC = 585,
+		heightC = 435;
+	
     public JButton button;
 
-    ArrayList<Integer> insertions = new ArrayList<Integer>();
+    //ArrayList<Integer> insertions = new ArrayList<Integer>();
     public int IDSBoard[][];
     public int IDSPlayerDeck[][];
 
     private JLabel cartaMover;
 
-    public ViewBoard() {
+    public ViewBoard(Player player) {
         // Inyeccion de Dependencias
-
-        this.widthBoard = 845;
-        this.heightBoard = 696;
-        this.widthC = 585;
-        this.heightC = 435;
 
         // Inicializacion de las matrices
         this.panelsBoard = new Cell[8][13];
@@ -53,7 +52,6 @@ public class ViewBoard extends javax.swing.JPanel
         cartaMover.setSize(new java.awt.Dimension(50, 50)); // establecemos una dimension al jlabel
         cartaMover.setLocation(800, 400);
         add(cartaMover);
-
         this.button = new JButton();
         this.button.setText("Finalizar Jugada");
         this.button.setBounds(1000, 500, 150, 30);
@@ -62,11 +60,11 @@ public class ViewBoard extends javax.swing.JPanel
 
         this.IDSBoard = new int[8][13];
         this.IDSPlayerDeck = new int[5][9];
-
-        initCards();
+        initCards(player);
         addListeners();
         initContainer();
         initBoard();
+		System.out.println("ViewBoard()");
     }
 
     /**
@@ -94,6 +92,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightBoard / 8;
         }
         paintBoard();
+		System.out.println("initBoard()");
     }
 
     /**
@@ -102,7 +101,11 @@ public class ViewBoard extends javax.swing.JPanel
     private void paintBoard() { // pintamos normal
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
-                panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? secColor : secColor);
+				// PINTAR CON PATRON DE MESA DE AJEDREZ
+                // panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
+				
+				// PINTAR CON PATRON UNIFORME
+				panelsBoard[row][col].setBackground(secColor);
             }
         }
     }
@@ -126,6 +129,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightC / 5;
         }
         paintContainer();
+		System.out.println("initContainer()");
     }
 
     private void paintContainer() { // pintamos normal
@@ -139,23 +143,22 @@ public class ViewBoard extends javax.swing.JPanel
     /**
      * Aqui se inicia el label de Cartas
      */
-    private void initCards() {
+    private void initCards(Player player) {
         //Metodo que posicionaran la matriz
         // Comienzan ambos en (20,20)
         // Width ancho - Horizontal
         // Heigth alto - Vertical
         int auxW = 900;
         int auxH = 20;
-        int id = 1;
+        int id = 0;
 
         for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 9; col++, ++id) {
-
+            for (int col = 0; col < 9 && id < player.cardCount(); col++, ++id) {
                 cards[row][col] = new JLabel();
                 cards[row][col].setSize(widthC / 9, heightC / 5);
                 //cards[row][col].setText("HOLA");
                 cards[row][col].setIcon(new ImageIcon(getClass()
-                        .getResource("/Sprites/" + deck.cardPic(id + 26)))
+                        .getResource("/Sprites/" + player.cardPicInPos(id)))
                 );
                 cards[row][col].setLocation(auxW, auxH);
                 this.add(cards[row][col]);
@@ -169,12 +172,16 @@ public class ViewBoard extends javax.swing.JPanel
     private void addListeners() {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-                cards[row][col].addMouseListener(getControl());
-                cards[row][col].addMouseMotionListener(getControl());
+				if (cards[row][col] != null)
+				{
+					cards[row][col].addMouseListener(getControl());
+					cards[row][col].addMouseMotionListener(getControl());
+				}
             }
         }
         button.addActionListener(getControl());
         this.addMouseListener(getControl());
+		System.out.println("addListeners()");
     }
 
     public BoardLogicController getControl() {

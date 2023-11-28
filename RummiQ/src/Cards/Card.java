@@ -7,11 +7,17 @@ public class Card
 	public final int id;
 	public final int cardNum; // Guarda el número de la carta
 	public final int picID; // Guarda el número con el cual se identificará la imagen
-	//private Image image; Aqui se pondrá el atributo para que coloqué la imagen que necesite
 	public final Symbol symbol;
 	public static final Card nullcard = new Card(); // Oliver: Carta de uso
 		// especial para casos donde alguna estructura no contiene cartas en
 		// algun espacio.
+	private static final Map<Integer, String> specials = Map.of(
+		0, "",
+		1, "As",
+		11, "Jota",
+		12, "Reina",
+		13, "Rey"
+	);
 	
 	public Card()
 	{
@@ -50,18 +56,10 @@ public class Card
 		switch (cardNum)
 		{
 		case 0: case 1: case 11: case 12: case 13:
-			return symbol.nameStr() + "/" + specials.get(cardNum) 
+			return symbol.nameStr() + specials.get(cardNum) 
 				+ symbol.symbolPic();
 		default:
 			return symbol.nameStr() + "/" + cardNum + symbol.symbolPic();
 		}
 	}
-	
-	private static final Map<Integer, String> specials = Map.of(
-		0, "",
-		1, "As",
-		11, "Jota",
-		12, "Reina",
-		13, "Rey"
-	);
 }

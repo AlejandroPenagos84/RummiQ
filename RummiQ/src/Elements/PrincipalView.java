@@ -8,14 +8,12 @@ public class PrincipalView extends javax.swing.JFrame
     
     public PrincipalView()
     {
-        super("RUMMI Q");
+        super("RUMMY-Q");
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         pack();
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -8,13 +8,12 @@ public class Player
 {
 	private ArrayList<Card> cards;
 	private CardStack stack;
-	private Board board;
 	
-	public Player(ArrayList<Card> cards, CardStack stack, Board board)
+	public Player()
 	{
-		this.cards = cards;
-		this.stack = stack;
-		this.board = board;
+		stack = CardStack.getStack();
+		System.out.println("Player()");
+		cards = stack.deal(14);
 	}
 	
 	public void pop() { cards.add(stack.pop()); } // Toma una carta del tope
@@ -27,6 +26,11 @@ public class Player
 		return Card.nullcard; // 
 	}
 	
+	public Card getCardInPos(int index) { return cards.get(index); }
+	public String cardPicInPos(int index) { return getCardInPos(index).cardPic(); }
+	public String cardPic(int id) { return getCard(id).cardPic(); }
+	public int cardCount() { return cards.size(); }
+	
 	private boolean inDeck(Card card)
 	{
 		for (Card c : cards) if (card == c) return true;
@@ -38,10 +42,10 @@ public class Player
 		for (Card ins : insertions)
 			if (!inDeck(ins)) return;
 		
-		if (!board.validState(boardAlteration)) return;
+		if (!Board.getBoard().validState(boardAlteration)) return;
 		
 		for (Card ins : insertions) cards.remove(ins);
 		
-		board.setState(insertions, boardAlteration);
+		Board.getBoard().setState(insertions, boardAlteration);
 	}
 }
