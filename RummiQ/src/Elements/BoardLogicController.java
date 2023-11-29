@@ -200,43 +200,40 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                 int finK = auxLargo * (k + 1) - 25;
                 if (x > ini && x < fin && y > iniK && y < finK) {
 
-                    if (viewBoard.getBoard()[k][i].id == 0) {
-                        int mitadX = ini + (auxAncho / 2); // este es el auxAncho /2
-                        int mitadY = iniK + (auxLargo / 2);
-                        aux.setLocation(mitadX, mitadY);
+                    int mitadX = ini + (auxAncho / 2); // este es el auxAncho /2
+                    int mitadY = iniK + (auxLargo / 2);
+                    aux.setLocation(mitadX, mitadY);
 
-                        if (state) {
-                            int id = viewBoard.IDSPlayerDeck[rowI][colI];
-                            viewBoard.IDSPlayerDeck[rowI][colI] = viewBoard.IDSBoard[k][i];
-                            viewBoard.IDSBoard[k][i] = id;
-                            // Coge la imagen transparente donde se supone ue se colocarála cara
-                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+                    if (state) {
+                        int id = viewBoard.IDSPlayerDeck[rowI][colI];
+                        viewBoard.IDSPlayerDeck[rowI][colI] = viewBoard.IDSBoard[k][i];
+                        viewBoard.IDSBoard[k][i] = id;
+                        // Coge la imagen transparente donde se supone ue se colocarála cara
+                        Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
 
-                            // Asigna la imagen de la carta que se está arrastrando en el JLabel asignado
-                            viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
+                        // Asigna la imagen de la carta que se está arrastrando en el JLabel asignado
+                        viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
 
-                            //El label de donde partio se asigna la imagen transparente
-                            aux.setIcon(transparent);
+                        //El label de donde partio se asigna la imagen transparente
+                        aux.setIcon(transparent);
 
-                            //Devuelve la posicion del label que se estaba moviendo a su posición original
-                            RestorePosition(aux, auxAncho, auxLargo);
-                        } else {
-                            int id = viewBoard.IDSBoard[rowI][colI];
-                            viewBoard.IDSBoard[rowI][colI] = viewBoard.IDSBoard[k][i];
-                            viewBoard.IDSBoard[k][i] = id;
-
-                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
-
-                            viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
-
-                            aux.setIcon(transparent);
-
-                            RestorePosition(aux, auxAncho, auxLargo);
-                        }
-                        return;
+                        //Devuelve la posicion del label que se estaba moviendo a su posición original
+                        RestorePosition(aux, auxAncho, auxLargo);
                     } else {
+                        int id = viewBoard.IDSBoard[rowI][colI];
+                        viewBoard.IDSBoard[rowI][colI] = viewBoard.IDSBoard[k][i];
+                        viewBoard.IDSBoard[k][i] = id;
+
+                        Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+
+                        viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
+
+                        aux.setIcon(transparent);
+
                         RestorePosition(aux, auxAncho, auxLargo);
                     }
+                    return;
+
                 } else {
                     RestorePosition(aux, auxAncho, auxLargo);
                 }

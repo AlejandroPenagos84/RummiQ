@@ -82,7 +82,6 @@ public class ViewBoard extends javax.swing.JPanel
         // Heigth alto - Vertical
         int auxW = 20;
         int auxH = 20;
-        initIDSBoard();
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
@@ -132,8 +131,6 @@ public class ViewBoard extends javax.swing.JPanel
     private void initContainer() {
         int auxW = 900;
         int auxH = 20;
-
-        initIDSPlayerDeck();
 
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
@@ -219,22 +216,7 @@ public class ViewBoard extends javax.swing.JPanel
         return controller;
     }
 
-    public void initIDSBoard() {
-        for (int col = 0; col < 13; col++) {
-            for (int row = 0; row < 8; row++) {
-                IDSBoard[row][col] = 0;
-            }
-        }
-    }
-
-    public void initIDSPlayerDeck() {
-        for (int col = 0; col < 9; col++) {
-            for (int row = 0; row < 5; row++) {
-                IDSPlayerDeck[row][col] = 2;
-            }
-        }
-    }
-
+    /*
     public void UpdateListeners() {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
@@ -263,7 +245,7 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
