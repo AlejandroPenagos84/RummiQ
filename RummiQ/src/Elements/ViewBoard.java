@@ -1,6 +1,7 @@
 package Elements;
 
 import Board.Board;
+import Cards.Card;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -60,6 +61,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         this.IDSBoard = new int[8][13];
         this.IDSPlayerDeck = new int[5][9];
+
         initCards(player);
         addListeners();
         initContainer();
@@ -155,7 +157,6 @@ public class ViewBoard extends javax.swing.JPanel
             for (int col = 0; col < 9 && id < player.cardCount(); col++, ++id) {
                 cards[row][col] = new JLabel();
                 cards[row][col].setSize(widthC / 9, heightC / 5);
-                //cards[row][col].setText("HOLA");
                 cards[row][col].setIcon(new ImageIcon(getClass()
                         .getResource("/Sprites/" + player.cardPicInPos(id)))
                 );
@@ -166,6 +167,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxW = 900;
             auxH += heightC / 5;
         }
+
     }
 
     private void addListeners() {
@@ -174,6 +176,10 @@ public class ViewBoard extends javax.swing.JPanel
                 if (cards[row][col] != null) {
                     cards[row][col].addMouseListener(getControl());
                     cards[row][col].addMouseMotionListener(getControl());
+                    if (cards[row][col].getIcon().toString().contains("Transparent.png")) {
+                        cards[row][col].removeMouseListener(getControl());
+                        cards[row][col].removeMouseMotionListener(getControl());
+                    }
                 }
             }
         }
@@ -235,11 +241,22 @@ public class ViewBoard extends javax.swing.JPanel
 
     public void UpdateState(ArrayList<Integer> playerCards, int[][] board) {
         IDSBoard = board;
+        ArrayList<Card> nonNull = new ArrayList<Card>();
+
         for (int row = 0, idx = 0; row < 5; ++row) {
             for (int col = 0; col < 9 && idx < playerCards.size(); ++col, ++idx) {
                 IDSPlayerDeck[row][col] = playerCards.get(idx);
             }
         }
+
+        for (int row = 0; row < 8; ++row) {
+            for (int col = 0; col < 13; ++col) {
+                if (board[row][col] != 0) {
+                    nonNull.add(deck.card(board[row][col]));
+                }
+            }
+        }
+        addListeners();
     }
 
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
@@ -257,23 +274,21 @@ public class ViewBoard extends javax.swing.JPanel
         // Actualizar Tablero
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                if(panelsBoard[row][col].id != IDSBoard[row][col])
-                {
-                     UpdateSingleCard(cards[row][col], row, col, true);     
-                     panelsBoard[row][col].id = IDSBoard[row][col];
+                if (panelsBoard[row][col].id != IDSBoard[row][col]) {
+                    UpdateSingleCard(cards[row][col], row, col, true);
+                    panelsBoard[row][col].id = IDSBoard[row][col];
                 }
-                    
+
             }
         }
-        
+
         //Actualizar Matriz jugador
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                if(panelsContainer[row][col].id != IDSPlayerDeck[row][col])
-                {
+                if (panelsContainer[row][col].id != IDSPlayerDeck[row][col]) {
                     UpdateSingleCard(cards[row][col], row, col, false);
                     panelsContainer[row][col].id = IDSPlayerDeck[row][col];
-                }   
+                }
             }
         }
     }
