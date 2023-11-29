@@ -1,0 +1,4 @@
+Client()
+	PrincipalView() // Jframe que contiene la interfaz
+	ViewBoard()
+		
