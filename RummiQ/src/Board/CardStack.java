@@ -4,6 +4,7 @@ import static Cards.Card.nullcard;
 import Cards.Deck;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class CardStack
@@ -18,6 +19,11 @@ public class CardStack
 		return instance;
 	}
 	
+	private void shuffle()
+	{
+		Collections.shuffle(cards);
+	}
+	
 	private CardStack()
 	{
 		System.out.println("CardStack()");
@@ -27,26 +33,32 @@ public class CardStack
 		{
 			cards.add(deck.card(i));
 		}
+		
+		shuffle();
 	}
 	
 	public ArrayList<Card> deal(int cardCount) // ADVERTENCIA: LAS CARTAS
 		// BARAJADAS POR ESTE METODO SE ELIMINAN DE LA PILA
 	{
+		ArrayList<Card> out = new ArrayList<>();
 		if (cardCount < 0) return deal(-cardCount);
 		if (cardCount >= cards.size() || cardCount == 0)
 			return new ArrayList<Card>(Arrays.asList(nullcard));
 		
-		System.out.println("CardStack.deal()");
+		for (int i=0; i < cardCount; ++i) out.add(pop());
 		
-		ArrayList<Card> out = new ArrayList<>();
+		/* 
+		System.out.println("CardStack.deal()");
 		for (int i=0; i < cardCount; ++i)
 		{
 			Card rand = randSelect();
 			out.add(rand);
 			cards.remove(rand);
-		}
+		}*/
 		
 		return out;
+		
+		
 	}
 	
 	private Card randSelect()
