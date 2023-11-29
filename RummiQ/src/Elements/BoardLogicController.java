@@ -188,25 +188,26 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                         aux.setLocation(mitadX, mitadY);
 
                         if (state) {
-                            viewBoard.getPanelsPlayerDeck()[rowI][colI].id = 0;//Cambio el ID  a -1 de la baraja de cartas del jugador
-
+                            // Coge la imagen transparente donde se supone ue se colocarála cara
+                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+                            
+                            // Asigna la imagen de la carta que se está arrastrando en el JLabel asignado
+                            viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
+                            
+                            //El label de donde partio se asigna la imagen transparente
+                            aux.setIcon(transparent);
+                            
+                            //Devuelve la posicion del label que se estaba moviendo a su posición original
+                            RestorePosition(aux, auxAncho, auxLargo);
+                        } else {
                             Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
 
                             viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
-
-                            aux.setIcon(transparent);
-
-                            RestorePosition(aux, auxAncho, auxLargo);
-                        } else {
-                            viewBoard.getBoardLabel()[rowI][colI].setIcon(aux.getIcon());// La imagen de aux se la coloco al label especificado
-
-                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+                            
                             aux.setIcon(transparent);
 
                             RestorePosition(aux, auxAncho, auxLargo);
                         }
-                        viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
-                        //insertions.add(auxID);
                         return;
                     } else {
                         RestorePosition(aux, auxAncho, auxLargo);
@@ -220,12 +221,8 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
     public void RestorePosition(JLabel aux, int auxAncho, int auxLargo) {
         if (state) {
-            viewBoard.getPanelsPlayerDeck()[rowI][colI].id = auxID;
-            //viewBoard.IDSPlayerDeck[rowI][colI] = auxID;
             aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
         } else {
-            viewBoard.getBoard()[rowI][colI].id = auxID;
-            // viewBoard.IDSBoard[rowI][colI] = auxID;
             aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
         }
     }

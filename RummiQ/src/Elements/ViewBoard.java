@@ -121,10 +121,10 @@ public class ViewBoard extends javax.swing.JPanel
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
                 // PINTAR CON PATRON DE MESA DE AJEDREZ
-                // panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
+                 panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
 
                 // PINTAR CON PATRON UNIFORME
-                panelsBoard[row][col].setBackground(secColor);
+                //panelsBoard[row][col].setBackground(secColor);
             }
         }
     }
