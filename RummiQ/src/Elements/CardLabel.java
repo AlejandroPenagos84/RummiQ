@@ -34,4 +34,6 @@ public class CardLabel extends JLabel
 		this.row = 0;
 		this.picStr = Card.nullcard.cardPic();
 	}
+        
+        
 }

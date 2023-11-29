@@ -296,9 +296,8 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
-        //addListeners();
     }
-
+/*
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
         int auxAncho = widthBoard / 13;// Debido a que tanto el board como el deck miden lo mismo, se puede usar esta misma variable
         int auxLargo = heightBoard / 8;//
@@ -308,14 +307,14 @@ public class ViewBoard extends javax.swing.JPanel
         } else {
             card.setLocation(900 + (auxAncho * col - 32) + (auxAncho / 2), (auxLargo * row - 25) + (auxLargo / 2));
         }
-    }
+    }*/
 
     public void UpdateInterface() {
         // Actualizar Tablero
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
                 if (panelsBoard[row][col].id != IDSBoard[row][col]) {
-                    UpdateSingleCard(playerDeck[row][col], row, col, true);
+                    //UpdateSingleCard(playerDeck[row][col], row, col, true);
                     panelsBoard[row][col].id = IDSBoard[row][col];
                 }
 
@@ -326,7 +325,7 @@ public class ViewBoard extends javax.swing.JPanel
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
                 if (panelsContainer[row][col].id != IDSPlayerDeck[row][col]) {
-                    UpdateSingleCard(boardLabel[row][col], row, col, false);
+                    //UpdateSingleCard(boardLabel[row][col], row, col, false);
                     panelsContainer[row][col].id = IDSPlayerDeck[row][col];
                 }
             }
