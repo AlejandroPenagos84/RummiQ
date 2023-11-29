@@ -19,8 +19,8 @@ public class ViewBoard extends javax.swing.JPanel
     private Cell panelsContainer[][];
     private Deck deck = Deck.getInstance();
 
-    private JLabel playerDeck[][];
-    private JLabel boardLabel[][];
+    private CardLabel playerDeck[][];
+    private CardLabel boardLabel[][];
 
     private BoardLogicController controller;
 
@@ -44,8 +44,8 @@ public class ViewBoard extends javax.swing.JPanel
         // Inicializacion de las matrices
         this.panelsBoard = new Cell[8][13];
         this.panelsContainer = new Cell[5][9];
-        this.playerDeck = new JLabel[5][9];
-        this.boardLabel = new JLabel[8][13];
+        this.playerDeck = new CardLabel[5][9];
+        this.boardLabel = new CardLabel[8][13];
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));
@@ -86,7 +86,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                boardLabel[row][col] = new JLabel();
+                boardLabel[row][col] = new CardLabel();
                 boardLabel[row][col].setSize(widthBoard / 13, heightBoard / 8);
                 boardLabel[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/Transparent.png")));
                 boardLabel[row][col].setLocation(auxW, auxH);
@@ -172,7 +172,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9 && id < player.cardCount(); col++, ++id) {
-                playerDeck[row][col] = new JLabel();
+                playerDeck[row][col] = new CardLabel();
                 playerDeck[row][col].setSize(widthC / 9, heightC / 5);
                 playerDeck[row][col].setIcon(new ImageIcon(getClass()
                         .getResource("/Sprites/" + player.cardPicInPos(id)))

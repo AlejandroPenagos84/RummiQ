@@ -120,6 +120,24 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                 }
             }
         }
+
+        for (int fila = 0; fila < 5; fila++) {
+            for (int columna = 0; columna < 9; columna++) {
+                System.out.print(viewBoard.IDSPlayerDeck[fila][columna]);
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+        System.out.print("\n");
+
+        for (int fila = 0; fila < 8; fila++) {
+            for (int columna = 0; columna < 13; columna++) {
+                System.out.print(viewBoard.IDSBoard[fila][columna]);
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+        System.out.print("\n");
     }
 
     @Override
@@ -188,22 +206,29 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                         aux.setLocation(mitadX, mitadY);
 
                         if (state) {
+                            int id = viewBoard.IDSPlayerDeck[rowI][colI];
+                            viewBoard.IDSPlayerDeck[rowI][colI] = viewBoard.IDSBoard[k][i];
+                            viewBoard.IDSBoard[k][i] = id;
                             // Coge la imagen transparente donde se supone ue se colocarála cara
                             Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
-                            
+
                             // Asigna la imagen de la carta que se está arrastrando en el JLabel asignado
                             viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
-                            
+
                             //El label de donde partio se asigna la imagen transparente
                             aux.setIcon(transparent);
-                            
+
                             //Devuelve la posicion del label que se estaba moviendo a su posición original
                             RestorePosition(aux, auxAncho, auxLargo);
                         } else {
+                            int id = viewBoard.IDSBoard[rowI][colI];
+                            viewBoard.IDSBoard[rowI][colI] = viewBoard.IDSBoard[k][i];
+                            viewBoard.IDSBoard[k][i] = id;
+
                             Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
 
                             viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
-                            
+
                             aux.setIcon(transparent);
 
                             RestorePosition(aux, auxAncho, auxLargo);
