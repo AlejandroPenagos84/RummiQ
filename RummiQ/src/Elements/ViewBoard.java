@@ -200,6 +200,7 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
         buttonEndGame.addActionListener(getControl());
+        this.buttonRequestCard.addActionListener(getControl());
         this.addMouseListener(getControl());
 
         for (int row = 0; row < 8; row++) {
@@ -313,7 +314,7 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
-        addListeners();
+        //addListeners();
     }
 
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
