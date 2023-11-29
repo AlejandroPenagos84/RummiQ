@@ -1,14 +1,11 @@
 package Elements;
 
-import Board.Board;
 import Cards.Card;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import Cards.Deck;
 import Player.Player;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -32,7 +29,8 @@ public class ViewBoard extends javax.swing.JPanel
             widthC = 585,
             heightC = 435;
 
-    public JButton button;
+    public JButton buttonEndGame;
+    public JButton buttonRequestCard;
 
     //ArrayList<Integer> insertions = new ArrayList<Integer>();
     public int IDSBoard[][];
@@ -53,19 +51,20 @@ public class ViewBoard extends javax.swing.JPanel
         setPreferredSize(new java.awt.Dimension(1600, 800));
         setBackground(new Color(209, 209, 209));
 
-        cartaMover = new JLabel("aqui"); // Jlabel que estoy moviendo
-        cartaMover.setSize(new java.awt.Dimension(50, 50)); // establecemos una dimension al jlabel
-        cartaMover.setLocation(800, 400);
-        add(cartaMover);
-        this.button = new JButton();
-        this.button.setText("Finalizar Jugada");
-        this.button.setBounds(1000, 500, 150, 30);
+        this.buttonEndGame = new JButton();
+        this.buttonEndGame.setText("Finalizar Jugada");
+        this.buttonEndGame.setBounds(1000, 500, 150, 30);
 
-        this.add(button);
+        this.add(buttonEndGame);
 
         this.IDSBoard = new int[8][13];
         this.IDSPlayerDeck = new int[5][9];
-
+        
+        this.buttonRequestCard = new JButton();
+        this.buttonRequestCard.setText("Pedir Carta");
+        this.buttonRequestCard.setBounds(1200, 500, 150, 30);
+        this.add(buttonRequestCard);
+        
         initCards(player);
         initBoard();
         addListeners();
@@ -200,7 +199,7 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
-        button.addActionListener(getControl());
+        buttonEndGame.addActionListener(getControl());
         this.addMouseListener(getControl());
 
         for (int row = 0; row < 8; row++) {

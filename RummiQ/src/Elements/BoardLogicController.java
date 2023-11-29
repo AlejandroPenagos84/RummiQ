@@ -232,7 +232,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == viewBoard.button) {
+        if (e.getSource() == viewBoard.buttonEndGame) {
             viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
         }
     }
