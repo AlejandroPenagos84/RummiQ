@@ -110,7 +110,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                 }
             }
         }
-
+        
         /*
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
@@ -190,6 +190,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                             aux.setIcon(transparent);
 
                             RestorePosition(aux, auxAncho, auxLargo);
+                            //aux.setIcon(new ImageIcon(getClass().getResource("/Sprites/Corazones/10Corazon.png")));
                             System.out.println(viewBoard.getBoardLabel()[k][i].getIcon());
                             System.out.println(viewBoard.getBoardLabel()[k][i].getLocation());
                             System.out.println(aux.getLocation());

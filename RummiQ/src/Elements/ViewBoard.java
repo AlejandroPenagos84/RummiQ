@@ -85,7 +85,6 @@ public class ViewBoard extends javax.swing.JPanel
         int auxH = 20;
         initIDSBoard();
 
-        
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
                 boardLabel[row][col] = new JLabel();
@@ -232,6 +231,36 @@ public class ViewBoard extends javax.swing.JPanel
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 5; row++) {
                 IDSPlayerDeck[row][col] = 2;
+            }
+        }
+    }
+
+    public void UpdateListeners() {
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (playerDeck[row][col] != null) {
+                    if (playerDeck[row][col].getIcon().toString().contains("Transparent.png")) {
+                        playerDeck[row][col].removeMouseListener(getControl());
+                        playerDeck[row][col].removeMouseMotionListener(getControl());
+                    } else {
+                        playerDeck[row][col].addMouseListener(getControl());
+                        playerDeck[row][col].addMouseMotionListener(getControl());
+                    }
+                }
+            }
+        }
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 13; col++) {
+                if (boardLabel[row][col] != null) {
+                    if (boardLabel[row][col].getIcon().toString().contains("Transparent.png")) {
+                        boardLabel[row][col].removeMouseListener(getControl());
+                        boardLabel[row][col].removeMouseMotionListener(getControl());
+                    } else {
+                        boardLabel[row][col].addMouseListener(getControl());
+                        boardLabel[row][col].addMouseMotionListener(getControl());
+                    }
+                }
             }
         }
     }

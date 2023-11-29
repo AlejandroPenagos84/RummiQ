@@ -118,6 +118,7 @@ public class Board
     public int[][] getPlayerDeckID() {
         return playerDeckID;
     }
+    
 
     public static class Memento
     {
@@ -139,10 +140,13 @@ public class Board
         }
     }
 
+    // Toma un estado
     public Memento takeState() {
         return new Memento(playerDeckID, boardID);
     }
     
+    
+    // Devuelve el estado al que tenia guardado
     public void restore(Memento memento)
     {
         this.boardID = memento.getSavedBoardID();
