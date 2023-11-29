@@ -18,6 +18,14 @@ public class CardLabel extends JLabel
 		this.picStr = picStr;
 	}
 	
+	public CardLabel(Card card)
+	{
+		this.id = card.id;
+		this.picStr = card.cardPic();
+		this.row=0;
+		this.col=0;
+	}
+	
 	public CardLabel(Card card, int col, int row)
 	{
 		this.id = card.id;
@@ -34,6 +42,7 @@ public class CardLabel extends JLabel
 		this.row = 0;
 		this.picStr = Card.nullcard.cardPic();
 	}
-        
-        
+
+	
+	public int getId() { return id; }
 }

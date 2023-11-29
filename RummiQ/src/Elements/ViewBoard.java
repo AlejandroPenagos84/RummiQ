@@ -38,7 +38,7 @@ public class ViewBoard extends javax.swing.JPanel
 
     private JLabel cartaMover;
 
-    public ViewBoard(Player player) {
+    public ViewBoard(int[][] state, Player player) {
         // Inyeccion de Dependencias
 
         // Inicializacion de las matrices
@@ -57,7 +57,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         this.add(buttonEndGame);
 
-        this.IDSBoard = new int[8][13];
+        this.IDSBoard = state;
         this.IDSPlayerDeck = new int[5][9];
         
         this.buttonRequestCard = new JButton();
@@ -96,6 +96,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightBoard / 8;
         }
 
+		System.out.println("ViewBoard.initBoard() a");
         auxH = 20;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
@@ -109,8 +110,10 @@ public class ViewBoard extends javax.swing.JPanel
             auxW = 20;
             auxH += heightBoard / 8;
         }
+		
+		System.out.println("ViewBoard.initBoard() b");
+		
         paintBoard();
-        System.out.println("initBoard()");
     }
 
     /**
@@ -169,7 +172,7 @@ public class ViewBoard extends javax.swing.JPanel
 
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9 && id < player.cardCount(); col++, ++id) {
-                playerDeck[row][col] = new CardLabel();
+                playerDeck[row][col] = new CardLabel(player.getCardInPos(id));
                 playerDeck[row][col].setSize(widthC / 9, heightC / 5);
                 playerDeck[row][col].setIcon(new ImageIcon(getClass()
                         .getResource("/Sprites/" + player.cardPicInPos(id)))

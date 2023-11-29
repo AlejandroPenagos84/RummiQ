@@ -6,6 +6,7 @@ import Cards.CardSetCreator.CardSetCreator;
 import Cards.Deck;
 import Elements.Client;
 import Elements.ViewBoard;
+import Player.Player;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -25,6 +26,7 @@ public class Board
 
     private Board() {
         history = new LinkedList<>();
+		boardID = new int[8][13];
     }
 
     public static Board getBoard() {
@@ -35,8 +37,9 @@ public class Board
         return instance;
     }
 
-    public void setViewBoard(ViewBoard viewBoard) {
-        this.viewBoard = viewBoard;
+    public void setView(int[][] state, Player player) {
+		System.out.println("Board.setView()");
+		this.viewBoard = new ViewBoard(state, player);
     }
 
     private void initCards() {
@@ -93,14 +96,10 @@ public class Board
         viewBoard.UpdateState(playerCardsID, boardID);
     }
 
-    public int[][] getBoardID() {
-        return boardID;
-    }
+    public int[][] getState() { return boardID; }
 
     //Este set
-    public void setBoardID(int[][] boardID) {
-        this.boardID = boardID;
-    }
+    public void setBoardID(int[][] boardID) { this.boardID = boardID; }
 
     //Este set
     public void setPlayerDeckID(int[][] playerDeckID) {
@@ -118,7 +117,8 @@ public class Board
     public int[][] getPlayerDeckID() {
         return playerDeckID;
     }
-    
+	
+	public ViewBoard getView() { return this.viewBoard; }
 
     public static class Memento
     {
