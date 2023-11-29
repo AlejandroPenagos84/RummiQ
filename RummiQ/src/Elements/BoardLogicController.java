@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import javax.swing.JLabel;
 
@@ -102,13 +104,14 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     public void mouseReleased(MouseEvent e) {
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                JLabel aux = viewBoard.getCards()[fila][columna];
+                JLabel aux = viewBoard.getPlayerDeck()[fila][columna];
                 if (e.getSource().equals(aux)) {
                     render(e, aux);
                 }
             }
         }
 
+        /*
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
                 System.out.print(viewBoard.IDSPlayerDeck[fila][columna] + " ");
@@ -121,7 +124,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                 System.out.print(viewBoard.IDSBoard[fila][columna] + " ");
             }
             System.out.println();
-        }
+        }*/
     }
 
     @Override
@@ -136,7 +139,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     public void mouseDragged(MouseEvent e) {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-                JLabel aux = viewBoard.getCards()[row][col];
+                JLabel aux = viewBoard.getPlayerDeck()[row][col];
                 if (e.getSource().equals(aux)) {
                     int x = aux.getLocation().x + e.getX() - ini.x; // añadimos algo del aux, position
                     int y = aux.getLocation().y + e.getY() - ini.y;
@@ -152,8 +155,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     }
 
     public void render(MouseEvent e, JLabel aux) {
-        
-        
+
         int auxAncho = viewBoard.widthBoard / 13; // un ancho provisional y un largo provicional
         int auxLargo = viewBoard.heightBoard / 8;
 
@@ -178,20 +180,38 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                         if (state) {
                             viewBoard.getPanelsPlayerDeck()[rowI][colI].id = 0;//Cambio el ID  a -1 de la baraja de cartas del jugador
                             viewBoard.IDSPlayerDeck[rowI][colI] = 0;
+
+                            System.out.println(aux.getIcon().toString());
+
+                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+
+                            viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());
+
+                            aux.setIcon(transparent);
+
+                            RestorePosition(aux, auxAncho, auxLargo);
+                            System.out.println(viewBoard.getBoardLabel()[k][i].getIcon());
+                            System.out.println(viewBoard.getBoardLabel()[k][i].getLocation());
+                            System.out.println(aux.getLocation());
                         } else {
                             viewBoard.getBoard()[rowI][colI].id = 0;//Cambio el ID  a -1 de la posicion del Tablero
+                            viewBoard.getBoardLabel()[k][i].setIcon(aux.getIcon());// La imagen de aux se la coloco al label especificado
 
+                            Icon transparent = viewBoard.getBoardLabel()[k][i].getIcon();
+                            aux.setIcon(transparent);
+
+                            System.out.println(aux.getIcon().toString());
+
+                            RestorePosition(aux, auxAncho, auxLargo);
                         }
                         viewBoard.getBoard()[k][i].id = auxID;//El ID que tenia en la baraja lo guardé en el tablero
-                        insertions.add(auxID);
+                        //insertions.add(auxID);
                         return;
                     } else {
-                        RestorePosition(aux,auxAncho,auxLargo);
+                        RestorePosition(aux, auxAncho, auxLargo);
                     }
-
-                    // al haber muchas cartas, hay que verificar que carta cogimos para ponerle el Text, en el Ajedres esta esa validacion , me parece , entonces aja, toca mriar
                 } else {
-                    RestorePosition(aux,auxAncho,auxLargo);
+                    RestorePosition(aux, auxAncho, auxLargo);
                 }
             }
         }
@@ -204,16 +224,14 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
             aux.setLocation(900 + (auxAncho * colI - 32) + (auxAncho / 2), (auxLargo * rowI - 24) + (auxLargo / 2));
         } else {
             viewBoard.getBoard()[rowI][colI].id = auxID;
-           // viewBoard.IDSBoard[rowI][colI] = auxID;
+            // viewBoard.IDSBoard[rowI][colI] = auxID;
             aux.setLocation((auxAncho * colI - 10) + (auxAncho / 2), (auxLargo * rowI - 25) + (auxLargo / 2));
         }
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) 
-    {
-        if(e.getSource() == viewBoard.button)
-        {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == viewBoard.button) {
             viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
         }
     }
