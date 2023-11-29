@@ -123,7 +123,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                System.out.print(viewBoard.IDSPlayerDeck[fila][columna]);
+                System.out.print(viewBoard.IDSPlayerDeck[fila][columna]+"\t");
             }
             System.out.print("\n");
         }
@@ -132,7 +132,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 13; columna++) {
-                System.out.print(viewBoard.IDSBoard[fila][columna]);
+                System.out.print(viewBoard.IDSBoard[fila][columna]+"\t");
             }
             System.out.print("\n");
         }

@@ -25,9 +25,9 @@ public class ViewBoard extends javax.swing.JPanel
     private BoardLogicController controller;
 
     public final int widthBoard = 845,
-            heightBoard = 696,
-            widthC = 585,
-            heightC = 435;
+        heightBoard = 696,
+        widthC = 585,
+        heightC = 435;
 
     public JButton buttonEndGame;
     public JButton buttonRequestCard;
@@ -59,16 +59,17 @@ public class ViewBoard extends javax.swing.JPanel
 
         this.IDSBoard = state;
         this.IDSPlayerDeck = new int[5][9];
-        
+
         this.buttonRequestCard = new JButton();
         this.buttonRequestCard.setText("Pedir Carta");
         this.buttonRequestCard.setBounds(1200, 500, 150, 30);
         this.add(buttonRequestCard);
-        
+
         initCards(player);
         initBoard();
         addListeners();
         initContainer();
+        IDPlayerDeck();
         System.out.println("ViewBoard()");
     }
 
@@ -96,7 +97,7 @@ public class ViewBoard extends javax.swing.JPanel
             auxH += heightBoard / 8;
         }
 
-		System.out.println("ViewBoard.initBoard() a");
+        System.out.println("ViewBoard.initBoard() a");
         auxH = 20;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
@@ -110,9 +111,9 @@ public class ViewBoard extends javax.swing.JPanel
             auxW = 20;
             auxH += heightBoard / 8;
         }
-		
-		System.out.println("ViewBoard.initBoard() b");
-		
+
+        System.out.println("ViewBoard.initBoard() b");
+
         paintBoard();
     }
 
@@ -123,7 +124,7 @@ public class ViewBoard extends javax.swing.JPanel
         for (int col = 0; col < 13; col++) {
             for (int row = 0; row < 8; row++) {
                 // PINTAR CON PATRON DE MESA DE AJEDREZ
-                 panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
+                panelsBoard[row][col].setBackground((row + col) % 2 == 0 ? primColor : secColor);
 
                 // PINTAR CON PATRON UNIFORME
                 //panelsBoard[row][col].setBackground(secColor);
@@ -175,7 +176,7 @@ public class ViewBoard extends javax.swing.JPanel
                 playerDeck[row][col] = new CardLabel(player.getCardInPos(id));
                 playerDeck[row][col].setSize(widthC / 9, heightC / 5);
                 playerDeck[row][col].setIcon(new ImageIcon(getClass()
-                        .getResource("/Sprites/" + player.cardPicInPos(id)))
+                    .getResource("/Sprites/" + player.cardPicInPos(id)))
                 );
                 playerDeck[row][col].setLocation(auxW, auxH);
                 this.add(playerDeck[row][col]);
@@ -219,6 +220,16 @@ public class ViewBoard extends javax.swing.JPanel
         return controller;
     }
 
+    private void IDPlayerDeck() {
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 9; col++) {
+                if(playerDeck[row][col] != null)
+                    IDSPlayerDeck[row][col] = playerDeck[row][col].getId();
+            }
+        }
+
+    }
+
     /*
     public void UpdateListeners() {
         for (int row = 0; row < 5; row++) {
@@ -249,7 +260,6 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }*/
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -300,7 +310,8 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }
-/*
+
+    /*
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
         int auxAncho = widthBoard / 13;// Debido a que tanto el board como el deck miden lo mismo, se puede usar esta misma variable
         int auxLargo = heightBoard / 8;//
