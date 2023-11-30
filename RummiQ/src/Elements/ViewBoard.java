@@ -11,7 +11,6 @@ import javax.swing.JButton;
 
 public class ViewBoard extends javax.swing.JPanel
 {
-
     private final Color primColor = new Color(247, 249, 249); // no se deberia cambiar 175, 96, 26 
     private final Color secColor = new Color(45, 85, 69); // 235, 152, 78 192, 57, 43
 
