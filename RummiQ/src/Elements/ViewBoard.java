@@ -300,14 +300,6 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
 
-        for (int row = 0; row < 8; ++row) {
-            for (int col = 0; col < 13; ++col) {
-                if (board[row][col] != 0) {
-                    nonNull.add(deck.card(board[row][col]));
-                }
-            }
-        }
-
         UpdateInterface();
     }
 

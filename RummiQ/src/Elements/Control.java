@@ -61,7 +61,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
         insertions = new ArrayList<>();
     }*/
     private void endTurn() {
-        if (!board.validState(viewBoard.IDSBoard)) {
+       /*if (!board.validState(viewBoard.IDSBoard)) {
             board.restore();
             if (current == player1) {
                 current = player2;
@@ -77,7 +77,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
             viewBoard.UpdateState(nextPlayerIDS, board.getState());
 			System.out.println("endTurn() A");
             return;
-        }
+        }*/
 
         ArrayList<Card> newDeck = new ArrayList<>();
         for (int row = 0; row < pDeckRows; ++row) {
