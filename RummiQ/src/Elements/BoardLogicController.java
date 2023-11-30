@@ -1,5 +1,7 @@
 package Elements;
 
+import Board.CardStack;
+import Cards.Card;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,7 +125,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
-                System.out.print(viewBoard.IDSPlayerDeck[fila][columna]+"\t");
+                System.out.print(viewBoard.IDSPlayerDeck[fila][columna] + "\t");
             }
             System.out.print("\n");
         }
@@ -132,7 +134,7 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
 
         for (int fila = 0; fila < 8; fila++) {
             for (int columna = 0; columna < 13; columna++) {
-                System.out.print(viewBoard.IDSBoard[fila][columna]+"\t");
+                System.out.print(viewBoard.IDSBoard[fila][columna] + "\t");
             }
             System.out.print("\n");
         }
@@ -253,6 +255,25 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == viewBoard.buttonEndGame) {
             viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
+        }
+
+        if (e.getSource() == viewBoard.buttonRequestCard) {
+            CardStack cardStack = CardStack.getStack();
+            Card newCard = cardStack.pop();
+
+            int auxW = 900;
+            int auxH = 20;
+            for (int row = 0; row < 5; row++) {
+                for (int col = 0; col < 9; col++) {
+                    if (viewBoard.IDSPlayerDeck[row][col] == 0) {
+                        viewBoard.playerDeck[row][col].setIcon(new ImageIcon(getClass()
+                            .getResource("/Sprites/" + newCard.cardPic()))
+                        );
+                        viewBoard.IDSPlayerDeck[row][col] = newCard.id;
+                        return;
+                    }
+                }
+            }
         }
     }
 }

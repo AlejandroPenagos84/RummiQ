@@ -18,7 +18,7 @@ public class ViewBoard extends javax.swing.JPanel
     private Cell panelsContainer[][];
     private Deck deck = Deck.getInstance();
 
-    private CardLabel playerDeck[][];
+    protected CardLabel playerDeck[][];
     private CardLabel boardLabel[][];
 
     private BoardLogicController controller;
@@ -171,7 +171,7 @@ public class ViewBoard extends javax.swing.JPanel
         int id = 0;
 
         for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 9 && id < player.cardCount(); col++, ++id) {
+            for (int col = 0; col < 9; col++, ++id) {
                 playerDeck[row][col] = new CardLabel(player.getCardInPos(id));
                 playerDeck[row][col].setSize(widthC / 9, heightC / 5);
                 playerDeck[row][col].setIcon(new ImageIcon(getClass()
@@ -200,7 +200,7 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
         buttonEndGame.addActionListener(getControl());
-        this.buttonRequestCard.addActionListener(getControl());
+        buttonRequestCard.addActionListener(getControl());
         this.addMouseListener(getControl());
 
         for (int row = 0; row < 8; row++) {
@@ -222,11 +222,9 @@ public class ViewBoard extends javax.swing.JPanel
     private void IDPlayerDeck() {
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-                if(playerDeck[row][col] != null)
-                    IDSPlayerDeck[row][col] = playerDeck[row][col].getId();
+                IDSPlayerDeck[row][col] = playerDeck[row][col].getId();
             }
         }
-
     }
 
     /*
@@ -310,6 +308,8 @@ public class ViewBoard extends javax.swing.JPanel
         }
     }
 
+    
+    
     /*
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
         int auxAncho = widthBoard / 13;// Debido a que tanto el board como el deck miden lo mismo, se puede usar esta misma variable
