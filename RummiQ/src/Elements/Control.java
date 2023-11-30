@@ -65,7 +65,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
             board.restore();
             if (current == player1) {
                 current = player2;
-            } else {
+            } else if (current == player2) {
                 current = player1;
             }
 
@@ -75,6 +75,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
             }
 
             viewBoard.UpdateState(nextPlayerIDS, board.getState());
+			System.out.println("endTurn() A");
             return;
         }
 
@@ -82,13 +83,15 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
         for (int row = 0; row < pDeckRows; ++row) {
             for (int col = 0; col < pDeckCols; ++col) {
                 newDeck.add(mainDeck.card(viewBoard.IDSPlayerDeck[row][col]));
+				System.out.print(viewBoard.IDSPlayerDeck[row][col] + "\t");
             }
+			System.out.println();
         }
 
         current.setDeck(newDeck);
         if (current == player1) {
             current = player2;
-        } else {
+        } else if (current == player2) {
             current = player1;
         }
         board.saveState();
@@ -99,6 +102,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
         }
 
         viewBoard.UpdateState(nextPlayerIDS, board.getState());
+		System.out.println("endTurn() B");
     }
 
     @Override

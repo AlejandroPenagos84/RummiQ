@@ -292,8 +292,10 @@ public class ViewBoard extends javax.swing.JPanel
         ArrayList<Card> nonNull = new ArrayList<Card>();
 
         for (int row = 0, idx = 0; row < 5; ++row) {
-            for (int col = 0; col < 9 && idx < playerCards.size(); ++col, ++idx) {
-                IDSPlayerDeck[row][col] = playerCards.get(idx);
+            for (int col = 0; col < 9; ++col, ++idx) {
+                if (idx < playerCards.size()) IDSPlayerDeck[row][col] 
+					= playerCards.get(idx);
+				else IDSPlayerDeck[row][col] = 0;
             }
         }
 

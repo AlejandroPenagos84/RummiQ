@@ -60,12 +60,17 @@ public class Player
 	
 	public void setDeck(ArrayList<Card> cards)
 	{
+		/*
 		for (int i=0; i < cards.size(); ++i)
 		{
 			if (cards.get(i) == Card.nullcard) continue;
 			if (i >= this.cards.size()) this.cards.add(cards.get(i));
 			this.cards.set(i, cards.get(i));
-		}
+		}*/
+		
+		this.cards = cards;
+		
+		//for (Card c : this.cards) if (c == Card.nullcard) this.cards.remove(c);
 	}
 	
 	public ArrayList<Card> getDeck() { return cards; }
