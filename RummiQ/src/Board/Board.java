@@ -75,9 +75,9 @@ public class Board
 				if (boardState[row][col] != 0)
 				{
 					testSequence.add(mainDeck.card(boardState[row][col]));
-
 					if (col+1 < 13 && boardState[row][col + 1] == 0)
 					{
+						System.out.println("Board.validState()");
 						CardSet testSet = CardSetCreator
 							.createCardSet(testSequence); // Oliver:
 						// se usa el CardSetCreator, aplicando a su vez
@@ -117,6 +117,7 @@ public class Board
 
 	public int[][] getState()
 	{
+		System.out.println("Board.getState()");
 		return boardID;
 	}
 

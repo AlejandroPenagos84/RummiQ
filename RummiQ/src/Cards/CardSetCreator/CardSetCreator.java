@@ -9,11 +9,20 @@ public class CardSetCreator
 	{
 		ColorCardSet colorSet = new ColorCardSet(cards);
 		NumCardSet numSet = new NumCardSet(cards);
-		if (colorSet.validState()) return colorSet;
-		if (numSet.validState()) return numSet;
+		if (colorSet.validState())
+		{
+			System.out.println("CardSet.createCardSet() A");
+			return colorSet;
+		}
+		if (numSet.validState())
+		{
+			System.out.println("CardSet.createCardSet() B");
+			return numSet;
+		}
 		
 		// Oliver: Retorno en caso de que la lista de cartas no califique
 			// como un juego valido: VVVVVVVVVVV
-		return new ColorCardSet(new ArrayList<>(1));
+		System.out.println("CardSet.createCardSet() C");
+		return new ColorCardSet(new ArrayList<Card>(){{add(Card.nullcard);}});
 	}
 }
