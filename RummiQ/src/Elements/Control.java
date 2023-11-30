@@ -33,70 +33,73 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
     private boolean state;
 
     private Point ini;
-	
-	
-	//VARIABLES DE ESTADO
+
+    //VARIABLES DE ESTADO
     private PrincipalView boardFrame;
     private Board board;
-	private Deck mainDeck = Deck.getInstance();
+    private Deck mainDeck = Deck.getInstance();
     private Player player1, player2, current;
-	private final int pDeckRows=9, pDeckCols=5;
-	
-	public Control()
-	{
-		player1 = new Player();
-		player2 = new Player();
+    private final int pDeckRows = 5, pDeckCols = 9;
+
+    public Control() {
+        player1 = new Player();
+        player2 = new Player();
         board = Board.getBoard();
-		board.saveState();
+        board.saveState();
         boardFrame = new PrincipalView();
         board.setView(board.getState(), player1, player2, this);
-		current = player1;
-		viewBoard = board.getView();
+        current = player1;
+        viewBoard = board.getView();
         boardFrame.add(board.getView());
         boardFrame.pack();
-		System.out.println("Control()");
-	}
+        System.out.println("Control()");
+    }
 
-	/*
+    /*
     public Control(ViewBoard viewBoard, Player player1, Player player2) {
         this.viewBoard = viewBoard;
         insertions = new ArrayList<>();
     }*/
-	
-	private void endTurn()
-	{
-		if (!board.validState(viewBoard.IDSBoard))
-		{
-			board.restore();
-			if (current == player1) current = player2;
-			else current = player1;
-			
-			ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
-			for (int i=0; i < current.cardCount(); ++i)
-				nextPlayerIDS.add(current.getCardInPos(i).id());
-		
-			viewBoard.UpdateState(nextPlayerIDS, board.getState());
-			return;
-		}
-		
-		ArrayList<Card> newDeck = new ArrayList<>();
-		for (int row=0; row < pDeckRows; ++row)
-		{
-			for (int col=0; col < pDeckCols; ++col)
-				newDeck.add(mainDeck.card(viewBoard.IDSPlayerDeck[row][col]));
-		}
-		
-		current.setDeck(newDeck);
-		if (current == player1) current = player2;
-		else current = player1;
-		board.saveState();
-		
-		ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
-		for (int i=0; i < current.cardCount(); ++i)
-			nextPlayerIDS.add(current.getCardInPos(i).id());
-		
-		viewBoard.UpdateState(nextPlayerIDS, board.getState());
-	}
+    private void endTurn() {
+        if (!board.validState(viewBoard.IDSBoard)) {
+            board.restore();
+            if (current == player1) {
+                current = player2;
+            } else {
+                current = player1;
+            }
+
+            ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
+            for (int i = 0; i < current.cardCount(); ++i) {
+                nextPlayerIDS.add(current.getCardInPos(i).id());
+            }
+
+            viewBoard.UpdateState(nextPlayerIDS, board.getState());
+            return;
+        }
+
+        ArrayList<Card> newDeck = new ArrayList<>();
+        for (int row = 0; row < pDeckRows; ++row) {
+            for (int col = 0; col < pDeckCols; ++col) {
+                newDeck.add(mainDeck.card(viewBoard.IDSPlayerDeck[row][col]));
+            }
+        }
+
+        current.setDeck(newDeck);
+        if (current == player1) {
+            current = player2;
+        } else {
+            current = player1;
+        }
+        board.saveState();
+
+        ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
+        for (int i = 0; i < current.cardCount(); ++i) {
+            nextPlayerIDS.add(current.getCardInPos(i).id());
+        }
+
+        viewBoard.UpdateState(nextPlayerIDS, board.getState());
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -317,8 +320,8 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == viewBoard.buttonEndGame) {
             //viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
-			System.out.println("ActionPerformed: endGame");
-			endTurn();
+            System.out.println("ActionPerformed: endGame");
+            endTurn();
         }
 
         if (e.getSource() == viewBoard.buttonRequestCard) {
@@ -334,10 +337,10 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
                             .getResource("/Sprites/" + newCard.cardPic()))
                         );
                         viewBoard.IDSPlayerDeck[row][col] = newCard.id;
-						viewBoard.playerDeck[row][col].addMouseMotionListener(this);
-						viewBoard.playerDeck[row][col].addMouseListener(this);
-						
-						endTurn();
+                        viewBoard.playerDeck[row][col].addMouseMotionListener(this);
+                        viewBoard.playerDeck[row][col].addMouseListener(this);
+
+                        endTurn();
                         return;
                     }
                 }

@@ -333,8 +333,8 @@ public class ViewBoard extends javax.swing.JPanel
         }
 
         //Actualizar Matriz jugador
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 13; col++) {
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 9; col++) {
                 if (playerDeck[row][col].getId() != IDSPlayerDeck[row][col]) {
                     playerDeck[row][col].setID(IDSPlayerDeck[row][col]);
                     playerDeck[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/"+playerDeck[row][col].getPicStr())));
