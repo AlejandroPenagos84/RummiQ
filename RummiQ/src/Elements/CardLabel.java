@@ -1,6 +1,7 @@
 package Elements;
 
 import Cards.Card;
+import Cards.Deck;
 import javax.swing.JLabel;
 
 public class CardLabel extends JLabel
@@ -41,6 +42,12 @@ public class CardLabel extends JLabel
 		this.col = 0;
 		this.row = 0;
 		this.picStr = Card.nullcard.cardPic();
+	}
+	
+	public String getPicStr()
+	{
+		Deck d = Deck.getInstance();
+		return d.card(id).cardPic();
 	}
 
 	
