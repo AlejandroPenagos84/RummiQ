@@ -5,6 +5,7 @@ import Cards.CardSet.CardSet;
 import Cards.CardSetCreator.CardSetCreator;
 import Cards.Deck;
 import Elements.Client;
+import Elements.Control;
 import Elements.ViewBoard;
 import Player.Player;
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ public class Board
 	private Card[][] boardCards = new Card[8][13]; // Creo la Matriz De Las Cartas
 	//private HashMap<Position, Integer> boardState;
 	private static Board instance;
-	private int[][] playerDeckID; // Cambiado de deckID a playerDeckID
+	//private int[][] playerDeckID; // Cambiado de deckID a playerDeckID
 	private int[][] boardID;
 	private ViewBoard viewBoard;
 	private Deque<Memento> history;
+	
+	private Memento safeState;
 
 	private Board()
 	{
@@ -40,10 +43,10 @@ public class Board
 		return instance;
 	}
 
-	public void setView(int[][] state, Player player1, Player player2)
+	public void setView(int[][] state, Player player1, Player player2, Control ctrl)
 	{
 		System.out.println("Board.setView()");
-		this.viewBoard = new ViewBoard(state, player1, player2);
+		this.viewBoard = new ViewBoard(state, player1, player2, ctrl);
 	}
 
 	private void initCards()
@@ -124,10 +127,10 @@ public class Board
 	}
 
 	//Este set
-	public void setPlayerDeckID(int[][] playerDeckID)
+	/*public void setPlayerDeckID(int[][] playerDeckID)
 	{
 		this.playerDeckID = playerDeckID;
-	}
+	}*/
 
 	public Client getClient()
 	{
@@ -139,10 +142,10 @@ public class Board
 		this.client = client;
 	}
 
-	public int[][] getPlayerDeckID()
+	/*public int[][] getPlayerDeckID()
 	{
 		return playerDeckID;
-	}
+	}*/
 
 	public ViewBoard getView()
 	{
@@ -150,20 +153,12 @@ public class Board
 	}
 
 	public static class Memento
-	{
-
-		private final int[][] playerDeckID; // Cambiado de deckID a playerDeckID
+	{ // Cambiado de deckID a playerDeckID
 		private final int[][] boardID;
 
-		private Memento(int[][] p_boardID, int[][] p_playerDeckID)
+		private Memento(int[][] p_boardID)
 		{
-			playerDeckID = p_playerDeckID;
 			boardID = p_boardID;
-		}
-
-		private int[][] getSavedPlayerDeckID()
-		{
-			return playerDeckID;
 		}
 
 		private int[][] getSavedBoardID()
@@ -173,15 +168,16 @@ public class Board
 	}
 
 	// Toma un estado
-	public Memento takeState()
+	public void saveState()
 	{
-		return new Memento(playerDeckID, boardID);
+		safeState = new Memento(boardID);
 	}
 
 	// Devuelve el estado al que tenia guardado
 	public void restore(Memento memento)
 	{
 		this.boardID = memento.getSavedBoardID();
-		this.playerDeckID = memento.getSavedPlayerDeckID();
 	}
+	
+	public void restore() { restore(safeState); }
 }

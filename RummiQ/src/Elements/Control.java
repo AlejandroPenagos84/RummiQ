@@ -3,6 +3,7 @@ package Elements;
 import Board.Board;
 import Board.CardStack;
 import Cards.Card;
+import Cards.Deck;
 import Player.Player;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -37,12 +38,56 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
 	//VARIABLES DE ESTADO
     private PrincipalView boardFrame;
     private Board board;
-    private Player player1, player2;
+	private Deck mainDeck = Deck.getInstance();
+    private Player player1, player2, current;
+	private final int pDeckRows=9, pDeckCols=5;
+	
+	public Control()
+	{
+		player1 = new Player();
+		player2 = new Player();
+        board = Board.getBoard();
+		board.saveState();
+        boardFrame = new PrincipalView();
+        board.setView(board.getState(), player1, player2, this);
+		current = player1;
+		viewBoard = board.getView();
+        boardFrame.add(board.getView());
+        boardFrame.pack();
+		System.out.println("Control()");
+	}
 
+	/*
     public Control(ViewBoard viewBoard, Player player1, Player player2) {
         this.viewBoard = viewBoard;
         insertions = new ArrayList<>();
-    }
+    }*/
+	
+	private void endTurn()
+	{
+		if (!board.validState(viewBoard.IDSBoard))
+		{
+			board.restore();
+			if (current == player1) current = player2;
+			else current = player1;
+			//viewBoard.UpdateState(current.getDeck(), board.getState());
+			return;
+		}
+		
+		ArrayList<Card> newDeck = new ArrayList<>();
+		for (int row=0; row < pDeckRows; ++row)
+		{
+			for (int col=0; col < pDeckCols; ++col)
+				newDeck.add(mainDeck.card(viewBoard.IDSPlayerDeck[row][col]));
+		}
+		
+		current.setDeck(newDeck);
+		if (current == player1) current = player2;
+		else current = player1;
+		board.saveState();
+		
+		//viewBoard.UpdateState(current.getDeck(), board.getState());
+	}
 
     @Override
     public void mouseClicked(MouseEvent e) {

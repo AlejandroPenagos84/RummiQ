@@ -38,6 +38,8 @@ public class Card
 	public Card(int id, int cardNum, int picID, String symbol)
 	{ this(id, cardNum, picID, new Symbol(symbol)); }
 	
+	public int id() { return id; }
+	
 	public String cardName()
 	{
 		if (id==0) return "Nulo.";

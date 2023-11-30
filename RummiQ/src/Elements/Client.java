@@ -14,7 +14,7 @@ public class Client
         PLAYER1 = new Player();
         BOARD = Board.getBoard();
         PRINCIPAL = new PrincipalView();
-        BOARD.setView(BOARD.getState(), PLAYER1, PLAYER2);
+        //BOARD.setView(BOARD.getState(), PLAYER1, PLAYER2);
         PRINCIPAL.add(BOARD.getView());
         PRINCIPAL.pack();
 

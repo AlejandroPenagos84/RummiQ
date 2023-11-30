@@ -11,7 +11,7 @@ import javax.swing.JButton;
 
 public class ViewBoard extends javax.swing.JPanel
 {
-    private final Color primColor = new Color(247, 249, 249); // no se deberia cambiar 175, 96, 26 
+    private final Color primColor = new Color(55, 102, 83); // no se deberia cambiar 175, 96, 26 
     private final Color secColor = new Color(45, 85, 69); // 235, 152, 78 192, 57, 43
 
     private Cell panelsBoard[][];
@@ -37,7 +37,7 @@ public class ViewBoard extends javax.swing.JPanel
 
     private JLabel cartaMover;
 
-    public ViewBoard(int[][] state, Player player, Player player2) {
+    public ViewBoard(int[][] state, Player player, Player player2, Control ctrl) {
         // Inyeccion de Dependencias
 
         // Inicializacion de las matrices
@@ -45,7 +45,7 @@ public class ViewBoard extends javax.swing.JPanel
         this.panelsContainer = new Cell[5][9];
         this.playerDeck = new CardLabel[5][9];
         this.boardLabel = new CardLabel[8][13];
-		controller = new Control(this, player, player2);
+		controller = ctrl;
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));

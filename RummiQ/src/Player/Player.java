@@ -59,6 +59,18 @@ public class Player
         }
         return false;
     }
+	
+	public void setDeck(ArrayList<Card> cards)
+	{
+		for (int i=0; i < cards.size(); ++i)
+		{
+			if (cards.get(i) == Card.nullcard) continue;
+			if (i >= this.cards.size()) this.cards.add(cards.get(i));
+			this.cards.set(i, cards.get(i));
+		}
+	}
+	
+	public ArrayList<Card> getDeck() { return cards; }
 
     public void alterBoard(ArrayList<Card> insertions, int[][] boardAlteration) {
         for (Card ins : insertions) {
