@@ -11,6 +11,7 @@ import javax.swing.JButton;
 
 public class ViewBoard extends javax.swing.JPanel
 {
+
     private final Color primColor = new Color(55, 102, 83); // no se deberia cambiar 175, 96, 26 
     private final Color secColor = new Color(45, 85, 69); // 235, 152, 78 192, 57, 43
 
@@ -45,7 +46,7 @@ public class ViewBoard extends javax.swing.JPanel
         this.panelsContainer = new Cell[5][9];
         this.playerDeck = new CardLabel[5][9];
         this.boardLabel = new CardLabel[8][13];
-		controller = ctrl;
+        controller = ctrl;
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));
@@ -224,7 +225,7 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }
-    
+
     /*
     public void UpdateListeners() {
         for (int row = 0; row < 5; row++) {
@@ -304,10 +305,10 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
-		
-		UpdateInterface();
+
+        UpdateInterface();
     }
-    
+
     /*
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {
         int auxAncho = widthBoard / 13;// Debido a que tanto el board como el deck miden lo mismo, se puede usar esta misma variable
@@ -319,27 +320,26 @@ public class ViewBoard extends javax.swing.JPanel
             card.setLocation(900 + (auxAncho * col - 32) + (auxAncho / 2), (auxLargo * row - 25) + (auxLargo / 2));
         }
     }*/
-
     public void UpdateInterface() {
         // Actualizar Tablero
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                if (boardLabel[row][col].getId()!= IDSBoard[row][col]) {
+                {
                     boardLabel[row][col].setID(IDSBoard[row][col]);
-                    boardLabel[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/"+boardLabel[row][col].getPicStr())));
+                    boardLabel[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/" + boardLabel[row][col].getPicStr())));
                 }
-
             }
         }
 
         //Actualizar Matriz jugador
         for (int row = 0; row < 5; row++) {
             for (int col = 0; col < 9; col++) {
-                if (playerDeck[row][col].getId() != IDSPlayerDeck[row][col]) {
-                    playerDeck[row][col].setID(IDSPlayerDeck[row][col]);
-                    playerDeck[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/"+playerDeck[row][col].getPicStr())));
-                }
+
+                System.out.print("\t"+IDSPlayerDeck[row][col]);
+                playerDeck[row][col].setID(IDSPlayerDeck[row][col]);
+                playerDeck[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/" + playerDeck[row][col].getPicStr())));
             }
+            System.out.println("");
         }
     }
 

@@ -187,7 +187,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
                 }
             }
         }
-
+/*
         for (int fila = 0; fila < 5; fila++) {
             for (int columna = 0; columna < 9; columna++) {
                 System.out.print(viewBoard.IDSPlayerDeck[fila][columna] + "\t");
@@ -204,7 +204,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
             System.out.print("\n");
         }
         System.out.print("\n");
-        System.out.print("\n");
+        System.out.print("\n");*/
     }
 
     @Override
@@ -337,9 +337,9 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
                             .getResource("/Sprites/" + newCard.cardPic()))
                         );
                         viewBoard.IDSPlayerDeck[row][col] = newCard.id;
+                        System.out.println("ID:" + newCard.id);
                         viewBoard.playerDeck[row][col].addMouseMotionListener(this);
                         viewBoard.playerDeck[row][col].addMouseListener(this);
-
                         endTurn();
                         return;
                     }

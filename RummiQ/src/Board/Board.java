@@ -76,7 +76,7 @@ public class Board
 				{
 					testSequence.add(mainDeck.card(boardState[row][col]));
 
-					if (boardState[row][col + 1] == 0)
+					if (boardState[row][col] == 0)
 					{
 						CardSet testSet = CardSetCreator
 							.createCardSet(testSequence); // Oliver:
