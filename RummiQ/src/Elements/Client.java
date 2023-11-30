@@ -8,13 +8,13 @@ public class Client
 
     private PrincipalView PRINCIPAL;
     private Board BOARD;
-    private Player PLAYER1;
+    private Player PLAYER1, PLAYER2;
 
     public Client() {
         PLAYER1 = new Player();
         BOARD = Board.getBoard();
         PRINCIPAL = new PrincipalView();
-        BOARD.setView(BOARD.getState(), PLAYER1);
+        BOARD.setView(BOARD.getState(), PLAYER1, PLAYER2);
         PRINCIPAL.add(BOARD.getView());
         PRINCIPAL.pack();
 

@@ -21,7 +21,7 @@ public class ViewBoard extends javax.swing.JPanel
     protected CardLabel playerDeck[][];
     private CardLabel boardLabel[][];
 
-    private BoardLogicController controller;
+    private Control controller;
 
     public final int widthBoard = 845,
         heightBoard = 696,
@@ -37,7 +37,7 @@ public class ViewBoard extends javax.swing.JPanel
 
     private JLabel cartaMover;
 
-    public ViewBoard(int[][] state, Player player) {
+    public ViewBoard(int[][] state, Player player, Player player2) {
         // Inyeccion de Dependencias
 
         // Inicializacion de las matrices
@@ -45,6 +45,7 @@ public class ViewBoard extends javax.swing.JPanel
         this.panelsContainer = new Cell[5][9];
         this.playerDeck = new CardLabel[5][9];
         this.boardLabel = new CardLabel[8][13];
+		controller = new Control(this, player, player2);
 
         setLayout(null);
         setPreferredSize(new java.awt.Dimension(1600, 800));
@@ -212,10 +213,7 @@ public class ViewBoard extends javax.swing.JPanel
         System.out.println("addListeners()");
     }
 
-    public BoardLogicController getControl() {
-        if (controller == null) {
-            controller = new BoardLogicController(this);
-        }
+    public Control getControl() {
         return controller;
     }
 

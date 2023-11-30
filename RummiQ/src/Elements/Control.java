@@ -1,7 +1,9 @@
 package Elements;
 
+import Board.Board;
 import Board.CardStack;
 import Cards.Card;
+import Player.Player;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ import javax.swing.JLabel;
  *
  * @author Alejandro Penagos
  */
-public class BoardLogicController implements MouseListener, MouseMotionListener, ActionListener
+public class Control implements MouseListener, MouseMotionListener, ActionListener
 {
 
     private ViewBoard viewBoard;
@@ -30,8 +32,14 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
     private boolean state;
 
     private Point ini;
+	
+	
+	//VARIABLES DE ESTADO
+    private PrincipalView boardFrame;
+    private Board board;
+    private Player player1, player2;
 
-    public BoardLogicController(ViewBoard viewBoard) {
+    public Control(ViewBoard viewBoard, Player player1, Player player2) {
         this.viewBoard = viewBoard;
         insertions = new ArrayList<>();
     }
@@ -270,6 +278,9 @@ public class BoardLogicController implements MouseListener, MouseMotionListener,
                             .getResource("/Sprites/" + newCard.cardPic()))
                         );
                         viewBoard.IDSPlayerDeck[row][col] = newCard.id;
+						viewBoard.playerDeck[row][col].addMouseMotionListener(this);
+						viewBoard.playerDeck[row][col].addMouseListener(this);
+						
                         return;
                     }
                 }
