@@ -11,13 +11,16 @@ public class ColorCardSet extends CardSet
 	public boolean validState()
 	{
 		if (this.sequence.size() > 4 || this.sequence.size() < 3) return false;
-		System.out.println("ColorCardSet.validState()");
-		for (Card c : sequence)
+		System.out.println("ColorCardSet.validState() a");
+		for (int i=1; i < sequence.size(); ++i)
 		{
-			if ((c.symbol == sequence.get(0).symbol) || 
-				(c.cardNum != sequence.get(0).cardNum))
+			System.out.println("ColorCardSet.validState(): " + sequence.get(i).getSymbol()
+				+ " " + sequence.get(0).getSymbol());
+			if ((sequence.get(i).symbol == sequence.get(0).symbol) || 
+				(sequence.get(i).cardNum != sequence.get(0).cardNum))
 				return false;
 		}
+		System.out.println("ColorCardSet.validState() b");
 		
 		return true;
 	}

@@ -53,6 +53,8 @@ public class Card
 		}
 	}
 	
+	public String getSymbol() { return symbol.nameStr(); }
+	
 	public String cardPic()
 	{
 		switch (cardNum)

@@ -7,6 +7,9 @@ public class CardSetCreator
 {
 	public static CardSet createCardSet(ArrayList<Card> cards)
 	{
+		if (cards.size() < 3) return new ColorCardSet(new ArrayList<Card>()
+			{{add(Card.nullcard);}});
+		
 		ColorCardSet colorSet = new ColorCardSet(cards);
 		NumCardSet numSet = new NumCardSet(cards);
 		if (colorSet.validState())

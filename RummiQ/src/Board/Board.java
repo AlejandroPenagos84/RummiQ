@@ -118,6 +118,12 @@ public class Board
 	public int[][] getState()
 	{
 		System.out.println("Board.getState()");
+		for (int row=0; row < 8; ++row)
+		{
+			for (int col=0; col < 13; ++col)
+				System.out.print(boardID[row][col] + "\t");
+			System.out.println();
+		}
 		return boardID;
 	}
 
@@ -155,17 +161,21 @@ public class Board
 
 	public static class Memento
 	{ // Cambiado de deckID a playerDeckID
-		private final int[][] boardID;
+		private final int[][] boardID = new int[8][13];
 
 		private Memento(int[][] p_boardID)
 		{
-			boardID = p_boardID;
+			for (int row=0; row < 8; ++row)
+				for (int col=0; col < 13; ++col)
+					boardID[row][col] = p_boardID[row][col];
 		}
 
 		private int[][] getSavedBoardID()
 		{
 			return boardID;
 		}
+		
+		public int get(int row, int col) { return boardID[row][col]; }
 	}
 
 	// Toma un estado
