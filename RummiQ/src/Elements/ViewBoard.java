@@ -304,9 +304,9 @@ public class ViewBoard extends javax.swing.JPanel
                 }
             }
         }
+		
+		UpdateInterface();
     }
-
-    
     
     /*
     private void UpdateSingleCard(JLabel card, int row, int col, boolean option) {

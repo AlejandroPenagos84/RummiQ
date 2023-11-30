@@ -70,7 +70,12 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
 			board.restore();
 			if (current == player1) current = player2;
 			else current = player1;
-			//viewBoard.UpdateState(current.getDeck(), board.getState());
+			
+			ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
+			for (int i=0; i < current.cardCount(); ++i)
+				nextPlayerIDS.add(current.getCardInPos(i).id());
+		
+			viewBoard.UpdateState(nextPlayerIDS, board.getState());
 			return;
 		}
 		
@@ -86,7 +91,11 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
 		else current = player1;
 		board.saveState();
 		
-		//viewBoard.UpdateState(current.getDeck(), board.getState());
+		ArrayList<Integer> nextPlayerIDS = new ArrayList<>();
+		for (int i=0; i < current.cardCount(); ++i)
+			nextPlayerIDS.add(current.getCardInPos(i).id());
+		
+		viewBoard.UpdateState(nextPlayerIDS, board.getState());
 	}
 
     @Override
@@ -307,7 +316,9 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == viewBoard.buttonEndGame) {
-            viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
+            //viewBoard.UpdateState(insertions, viewBoard.IDSBoard);
+			System.out.println("ActionPerformed: endGame");
+			endTurn();
         }
 
         if (e.getSource() == viewBoard.buttonRequestCard) {
@@ -326,6 +337,7 @@ public class Control implements MouseListener, MouseMotionListener, ActionListen
 						viewBoard.playerDeck[row][col].addMouseMotionListener(this);
 						viewBoard.playerDeck[row][col].addMouseListener(this);
 						
+						endTurn();
                         return;
                     }
                 }

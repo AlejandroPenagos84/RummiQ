@@ -47,9 +47,7 @@ public class Player
         return getCard(id).cardPic();
     }
 
-    public int cardCount() {
-        return cards.size();
-    }
+    public int cardCount() { return cards.size(); }
 
     private boolean inDeck(Card card) {
         for (Card c : cards) {
