@@ -224,7 +224,7 @@ public class ViewBoard extends javax.swing.JPanel
             }
         }
     }
-
+    
     /*
     public void UpdateListeners() {
         for (int row = 0; row < 5; row++) {
@@ -324,9 +324,9 @@ public class ViewBoard extends javax.swing.JPanel
         // Actualizar Tablero
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                if (panelsBoard[row][col].id != IDSBoard[row][col]) {
-                    //UpdateSingleCard(playerDeck[row][col], row, col, true);
-                    panelsBoard[row][col].id = IDSBoard[row][col];
+                if (boardLabel[row][col].getId()!= IDSBoard[row][col]) {
+                    boardLabel[row][col].setID(IDSBoard[row][col]);
+                    boardLabel[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/"+boardLabel[row][col].getPicStr())));
                 }
 
             }
@@ -335,9 +335,9 @@ public class ViewBoard extends javax.swing.JPanel
         //Actualizar Matriz jugador
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 13; col++) {
-                if (panelsContainer[row][col].id != IDSPlayerDeck[row][col]) {
-                    //UpdateSingleCard(boardLabel[row][col], row, col, false);
-                    panelsContainer[row][col].id = IDSPlayerDeck[row][col];
+                if (playerDeck[row][col].getId() != IDSPlayerDeck[row][col]) {
+                    playerDeck[row][col].setID(IDSPlayerDeck[row][col]);
+                    playerDeck[row][col].setIcon(new ImageIcon(getClass().getResource("/Sprites/"+playerDeck[row][col].getPicStr())));
                 }
             }
         }
