@@ -11,6 +11,7 @@ public class ColorCardSet extends CardSet
 	public boolean validState()
 	{
 		if (this.sequence.size() > 4 || this.sequence.size() < 3) return false;
+		System.out.println("ColorCardSet.validState()");
 		for (Card c : sequence)
 		{
 			if ((c.symbol == sequence.get(0).symbol) || 
